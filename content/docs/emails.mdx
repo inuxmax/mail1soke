@@ -49,7 +49,7 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -H "wrdo-api-key: YOUR_API_KEY" \
   -d '{
-    "emailAddress": "your-suffix@wr.do"
+    "emailAddress": "your-suffix@inboxs.me"
   }' \
   https://inboxs.me/api/v1/email
 ```
@@ -58,7 +58,7 @@ curl -X POST \
 
 ```json
 {
-  "emailAddress": "your-suffix@wr.do" // required, suffix must be at least 5 characters
+  "emailAddress": "your-suffix@inboxs.me" // required, suffix must be at least 5 characters
 }
 ```
 
@@ -101,7 +101,7 @@ The `GET /api/v1/email/inbox` endpoint allows you to retrieve all forwarded emai
 ```bash
 curl -X GET \
   -H "wrdo-api-key: YOUR_API_KEY" \
-  "https://inboxs.me/api/v1/email/inbox?emailAddress=your-suffix@wr.do&page=1&size=10"
+  "https://inboxs.me/api/v1/email/inbox?emailAddress=your-suffix@inboxs.me&page=1&size=10"
 ```
 
 #### Query Parameters
@@ -160,7 +160,7 @@ The `DELETE /api/v1/email` endpoint allows you to delete a specific email addres
 curl -X DELETE \
   -H "wrdo-api-key: YOUR_API_KEY" \
   -d '{
-    "emailAddress": "your-suffix@wr.do"
+    "emailAddress": "your-suffix@inboxs.me"
   }' \
   "https://inboxs.me/api/v1/email"
 ```
