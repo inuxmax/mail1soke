@@ -33,7 +33,7 @@ export default function HeroLanding({
           <span className="mr-1">🚀</span>
           {t("deployWithVercel")}&nbsp;
           <span className="font-bold" style={{ fontFamily: "Bahamas Bold" }}>
-            Vercel
+            Email
           </span>
           &nbsp;
           {t("now")}
