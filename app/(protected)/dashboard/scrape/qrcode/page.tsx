@@ -31,10 +31,10 @@ export default async function DashboardPage() {
         target="extracting url as QR code"
         link="/docs/open-api/qrcode"
       />
-      <CodeLight content={`https://wr.do/api/v1/scraping/qrcode`} />
+      <CodeLight content={`https://inboxs.me/api/v1/scraping/qrcode`} />
       <QRCodeEditor
         user={{ id: user.id, apiKey: user.apiKey || "", team: user.team }}
-        url="https://github.com/oiov"
+        url="https://github.com/"
       />
     </>
   );

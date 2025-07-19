@@ -38,7 +38,7 @@ export async function generateMetadata({
   const { title, description } = doc;
 
   return constructMetadata({
-    title: `${title} – WR.DO`,
+    title: `${title} – Mail1s.Net`,
     description: description,
   });
 }

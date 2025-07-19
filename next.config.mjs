@@ -75,42 +75,42 @@ const nextConfig = {
       },
       {
         source: "/0",
-        destination: "https://wr.do/s/0",
+        destination: "https://inboxs.me/s/0",
         permanent: true,
       },
       {
         source: "/9",
-        destination: "https://wr.do/s/9",
+        destination: "https://inboxs.me/s/9",
         permanent: true,
       },
       {
         source: "/ai",
-        destination: "https://wr.do/s/ai?ref=wrdo",
+        destination: "https://inboxs.me/s/ai?ref=wrdo",
         permanent: true,
       },
       {
         source: "/cps",
-        destination: "https://wr.do/s/cps",
+        destination: "https://inboxs.me/s/cps",
         permanent: true,
       },
       {
         source: "/x",
-        destination: "https://wr.do/s/x",
+        destination: "https://inboxs.me/s/x",
         permanent: true,
       },
       {
         source: "/solo",
-        destination: "https://wr.do/s/solo",
+        destination: "https://inboxs.me/s/solo",
         permanent: true,
       },
       {
         source: "/rmbg",
-        destination: "https://wr.do/s/rmbg",
+        destination: "https://inboxs.me/s/rmbg",
         permanent: true,
       },
       {
         source: "/llk",
-        destination: "https://wr.do/s/llk",
+        destination: "https://inboxs.me/s/llk",
         permanent: true,
       },
     ];
