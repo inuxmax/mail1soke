@@ -14,7 +14,7 @@ export function UserAvatar({ user, ...props }: UserAvatarProps) {
         alt="Picture"
         src={
           user.image ??
-          `https://unavatar.io/${user.email}?ttl=1h&fallback=https://inboxs.me/_static/avatar.png`
+          `https://unavatar.io/${user.email}?ttl=1h&fallback=https://Mail1s.net/_static/avatar.png`
         }
         referrerPolicy="no-referrer"
       />

@@ -1,6 +1,6 @@
 <div align="center">
   <h1>WR.DO</h1>
-  <p><a href="https://inboxs.me/docs/developer">Docs</a> · <a href="https://inboxs.me/feedback">Feedback</a> · English | <a href="/README-zh.md">简体中文</a></p>
+  <p><a href="https://Mail1s.net/docs/developer">Docs</a> · <a href="https://Mail1s.net/feedback">Feedback</a> · English | <a href="/README-zh.md">简体中文</a></p>
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/oiov/wr.do?style=flat-square">
   <img src="https://img.shields.io/github/stars/oiov/wr.do.svg?logo=github&style=flat-square" alt="star"/>
   <img alt="GitHub forks" src="https://img.shields.io/github/forks/oiov/wr.do?style=flat-square">
@@ -13,7 +13,7 @@
 
 WR.DO is a all-in-one web utility platform featuring short links with analytics, temporary email service, subdomain management, file storage, open APIs for screenshots and metadata extraction, and comprehensive admin dashboard.
 
-- Official website: [https://inboxs.me](https://inboxs.me)
+- Official website: [https://Mail1s.net](https://Mail1s.net)
 - Demo: [https://699399.xyz](https://699399.xyz) (Account: `admin@admin.com`, Password: `123456`)
 
 ## Features
@@ -74,23 +74,23 @@ WR.DO is a all-in-one web utility platform featuring short links with analytics,
 
 <table>
   <tr>
-    <td><img src="https://inboxs.me/_static/images/light-preview.png" /></td>
-    <td><img src="https://inboxs.me/_static/images/example_02.png" /></td>
+    <td><img src="https://Mail1s.net/_static/images/light-preview.png" /></td>
+    <td><img src="https://Mail1s.net/_static/images/example_02.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://inboxs.me/_static/images/example_01.png" /></td>
-    <td><img src="https://inboxs.me/_static/images/realtime-globe.png" /></td>
+    <td><img src="https://Mail1s.net/_static/images/example_01.png" /></td>
+    <td><img src="https://Mail1s.net/_static/images/realtime-globe.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://inboxs.me/_static/images/example_03.png" /></td>
-    <td><img src="https://inboxs.me/_static/images/domains.png" /></td>
+    <td><img src="https://Mail1s.net/_static/images/example_03.png" /></td>
+    <td><img src="https://Mail1s.net/_static/images/domains.png" /></td>
   </tr>
 </table>
 
 
 ## Quick Start
 
-See step by step installation tutorial at [Quick Start for Developer](https://inboxs.me/docs/developer/quick-start).
+See step by step installation tutorial at [Quick Start for Developer](https://Mail1s.net/docs/developer/quick-start).
 
 ## Self-hosted
 
@@ -153,7 +153,7 @@ Follow https://localhost:3000/setup
 
 ## Environment Variables
 
-Via [Installation For Developer](https://inboxs.me/docs/developer).
+Via [Installation For Developer](https://Mail1s.net/docs/developer).
 
 ## Technology Stack
 
@@ -173,14 +173,14 @@ This project is configured with a sync workflow for the upstream repository [oio
 - 🚨 **Smart Error Handling** - Auto-create detailed Issues when sync fails
 - 🧹 **Auto Cleanup Notifications** - Automatically close previous sync failure Issues
 
-See [How to Trigger Sync](https://inboxs.me/docs/developer/sync) for details.
+See [How to Trigger Sync](https://Mail1s.net/docs/developer/sync) for details.
 
 ## Community Group
 
 - Discord: https://discord.gg/AHPQYuZu3m
 - 微信群：
 
-<img width="300" src="https://inboxs.me/s/group" />
+<img width="300" src="https://Mail1s.net/s/group" />
 
 ## License
 

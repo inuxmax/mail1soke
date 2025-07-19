@@ -951,7 +951,7 @@ export default function ChatRoom() {
           Powered by{" "}
           <Link
             className="hover:underline"
-            href={"https://inboxs.me"}
+            href={"https://Mail1s.net"}
             target="_blank"
             style={{ fontFamily: "Bahamas Bold" }}
           >

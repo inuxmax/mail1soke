@@ -112,7 +112,7 @@ export const PricingSection = () => {
               price={t("enterprisePrice")}
               bestFor={t("enterpriseBestFor")}
               CTA={
-                <Link href={"mailto:support@Inboxs.me"}>
+                <Link href={"mailto:support@Mail1s.net"}>
                   <Button className="w-full" variant="outline">
                     {t("contactUs")}
                   </Button>

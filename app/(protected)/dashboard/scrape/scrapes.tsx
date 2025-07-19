@@ -86,7 +86,7 @@ export function ScreenshotScraping({
 
   return (
     <>
-      <CodeLight content={`https://inboxs.me/api/v1/scraping/screenshot`} />
+      <CodeLight content={`https://Mail1s.net/api/v1/scraping/screenshot`} />
       <Card className="bg-gray-50 dark:bg-gray-900">
         <CardHeader>
           <CardTitle>{t("Playground")}</CardTitle>
@@ -205,7 +205,7 @@ export function MetaScraping({
 
   return (
     <>
-      <CodeLight content={`https://inboxs.me/api/v1/scraping/meta`} />
+      <CodeLight content={`https://Mail1s.net/api/v1/scraping/meta`} />
       <Card className="bg-gray-50 dark:bg-gray-900">
         <CardHeader>
           <CardTitle>{t("Playground")}</CardTitle>
@@ -304,7 +304,7 @@ export function MarkdownScraping({
 
   return (
     <>
-      <CodeLight content={`https://inboxs.me/api/v1/scraping/markdown`} />
+      <CodeLight content={`https://Mail1s.net/api/v1/scraping/markdown`} />
       <Card className="bg-gray-50 dark:bg-gray-900">
         <CardHeader>
           <CardTitle>Markdown</CardTitle>
@@ -400,7 +400,7 @@ export function TextScraping({
 
   return (
     <>
-      <CodeLight content={`https://inboxs.me/api/v1/scraping/text`} />
+      <CodeLight content={`https://Mail1s.net/api/v1/scraping/text`} />
       <Card className="bg-gray-50 dark:bg-gray-900">
         <CardHeader>
           <CardTitle>{t("Text")}</CardTitle>
@@ -494,7 +494,7 @@ export function QrCodeScraping({
 
   return (
     <>
-      <CodeLight content={`https://inboxs.me/api/v1/scraping/qrcode`} />
+      <CodeLight content={`https://Mail1s.net/api/v1/scraping/qrcode`} />
       <Card className="bg-gray-50 dark:bg-gray-900">
         <CardHeader>
           <CardTitle>{t("Playground")}</CardTitle>

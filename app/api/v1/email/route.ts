@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
   const user = await checkApiKey(custom_api_key);
   if (!user?.id) {
     return Response.json(
-      "Invalid API key. You can get your API key from https://inboxs.me/dashboard/settings.",
+      "Invalid API key. You can get your API key from https://Mail1s.net/dashboard/settings.",
       { status: 401 },
     );
   }
@@ -102,7 +102,7 @@ export async function DELETE(req: NextRequest) {
   const user = await checkApiKey(custom_api_key);
   if (!user?.id) {
     return Response.json(
-      "Invalid API key. You can get your API key from https://inboxs.me/dashboard/settings.",
+      "Invalid API key. You can get your API key from https://Mail1s.net/dashboard/settings.",
       { status: 401 },
     );
   }

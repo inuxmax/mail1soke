@@ -54,7 +54,7 @@ export async function GET(req: Request) {
               color: "transparent",
             }}
           >
-            inboxs.me
+            Mail1s.net
           </div>
 
           <div tw="flex flex-col flex-1 py-16">

@@ -7,7 +7,7 @@ import { DashboardHeader } from "@/components/dashboard/header";
 import UsersList from "./user-list";
 
 export const metadata = constructMetadata({
-  title: "User Management – inboxs.me",
+  title: "User Management – Mail1s.net",
   description: "List and manage all users.",
 });
 

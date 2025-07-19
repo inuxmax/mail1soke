@@ -66,7 +66,7 @@ export default function UrlShotenerExp() {
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="text-base font-bold text-gray-700 dark:text-gray-50">
-                      Inboxs.me/s/try
+                      Mail1s.net/s/try
                     </p>
                     <div className="flex gap-1">
                       <button className="rounded-full border p-1.5 transition-colors hover:bg-gray-100 dark:bg-gray-600/50">
@@ -79,7 +79,7 @@ export default function UrlShotenerExp() {
                   </div>
                   <div className="flex items-center gap-1 text-sm font-semibold text-gray-400">
                     <Icons.forwardArrow className="h-4 w-4 shrink-0 text-gray-400" />
-                    Inboxs.me/dashboard
+                    Mail1s.net/dashboard
                   </div>
                 </div>
               </div>

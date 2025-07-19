@@ -75,42 +75,42 @@ const nextConfig = {
       },
       {
         source: "/0",
-        destination: "https://inboxs.me/s/0",
+        destination: "https://Mail1s.net/s/0",
         permanent: true,
       },
       {
         source: "/9",
-        destination: "https://inboxs.me/s/9",
+        destination: "https://Mail1s.net/s/9",
         permanent: true,
       },
       {
         source: "/ai",
-        destination: "https://inboxs.me/s/ai?ref=wrdo",
+        destination: "https://Mail1s.net/s/ai?ref=wrdo",
         permanent: true,
       },
       {
         source: "/cps",
-        destination: "https://inboxs.me/s/cps",
+        destination: "https://Mail1s.net/s/cps",
         permanent: true,
       },
       {
         source: "/x",
-        destination: "https://inboxs.me/s/x",
+        destination: "https://Mail1s.net/s/x",
         permanent: true,
       },
       {
         source: "/solo",
-        destination: "https://inboxs.me/s/solo",
+        destination: "https://Mail1s.net/s/solo",
         permanent: true,
       },
       {
         source: "/rmbg",
-        destination: "https://inboxs.me/s/rmbg",
+        destination: "https://Mail1s.net/s/rmbg",
         permanent: true,
       },
       {
         source: "/llk",
-        destination: "https://inboxs.me/s/llk",
+        destination: "https://Mail1s.net/s/llk",
         permanent: true,
       },
     ];

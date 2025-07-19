@@ -48,11 +48,11 @@ export default {
     }),
     Resend({
       apiKey: env.RESEND_API_KEY,
-      from: env.RESEND_FROM_EMAIL || "wrdo <support@Inboxs.me>",
+      from: env.RESEND_FROM_EMAIL || "wrdo <support@Mail1s.net>",
       async sendVerificationRequest({ identifier: email, url, provider }) {
         try {
           const { error } = await resend.emails.send({
-            from: provider.from || "no-reply@Inboxs.me",
+            from: provider.from || "no-reply@Mail1s.net",
             to: [email],
             subject: "Verify your email address",
             html: getVerificationEmailHtml({ url, appName: siteConfig.name }),

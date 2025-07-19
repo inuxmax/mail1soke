@@ -26,7 +26,7 @@ import { RadialShapeChart } from "./api-key-active-chart";
 import { LineChartMultiple } from "./line-chart-multiple";
 
 export const metadata = constructMetadata({
-  title: "Admin – inboxs.me",
+  title: "Admin – Mail1s.net",
   description: "Admin page for only admin management.",
 });
 

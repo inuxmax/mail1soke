@@ -11,7 +11,7 @@ interface GitHubResponse {
 
 async function getGitHubStars(owner: string, repo: string) {
   const res = await fetch(
-    `https://inboxs.me/api/github?owner=${owner}&repo=${repo}`,
+    `https://Mail1s.net/api/github?owner=${owner}&repo=${repo}`,
     {
       next: { revalidate: 3600 },
     },

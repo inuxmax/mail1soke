@@ -28,7 +28,7 @@ export async function generateMetadata({
   const { title, description } = page;
 
   return constructMetadata({
-    title: `${title} – inboxs.me`,
+    title: `${title} – Mail1s.net`,
     description: description,
   });
 }
