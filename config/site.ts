@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
   ogImage: `${site_url}/_static/og.jpg`,
   links: {
     twitter: "https://twitter.com/yesmoree",
-    github: "Mail1s.net",
+    github: "https://Mail1s.net",
     feedback: "https://github.com/oiov/wr.do/issues",
     discord: "https://discord.gg/AHPQYuZu3m",
     oichat: "https://oi.wr.do",
