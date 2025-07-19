@@ -3,7 +3,7 @@ import { env } from "@/env.mjs";
 
 const site_url = env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 const email_r2_domain = env.NEXT_PUBLIC_EMAIL_R2_DOMAIN || "";
-const support_email = env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@inboxs.me";
+const support_email = env.NEXT_PUBLIC_SUPPORT_EMAIL || "nghimanobuc@gmail.com";
 const app_name = env.NEXT_PUBLIC_APP_NAME || "inboxs.me";
 
 export const siteConfig: SiteConfig = {
@@ -48,7 +48,7 @@ export const footerLinks: SidebarNavItem[] = [
     items: [
       { title: "Introduction", href: "/docs" },
       { title: "Guide", href: "/docs/quick-start" },
-      { title: "Developer", href: "/docs/developer" },
+      { title: "Developer", href: "/docs/quick-start" },
       { title: "Contact", href: siteConfig.mailSupport },
     ],
   },
