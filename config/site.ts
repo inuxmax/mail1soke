@@ -3,8 +3,8 @@ import { env } from "@/env.mjs";
 
 const site_url = env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 const email_r2_domain = env.NEXT_PUBLIC_EMAIL_R2_DOMAIN || "";
-const support_email = env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@wr.do";
-const app_name = env.NEXT_PUBLIC_APP_NAME || "WR.DO";
+const support_email = env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@inboxs.me";
+const app_name = env.NEXT_PUBLIC_APP_NAME || "inboxs.me";
 
 export const siteConfig: SiteConfig = {
   name: app_name,
@@ -13,11 +13,11 @@ export const siteConfig: SiteConfig = {
   url: site_url,
   ogImage: `${site_url}/_static/og.jpg`,
   links: {
-    twitter: "https://twitter.com/yesmoree",
-    github: "https://Mail1s.net",
-    feedback: "https://github.com/oiov/wr.do/issues",
-    discord: "https://discord.gg/AHPQYuZu3m",
-    oichat: "https://oi.wr.do",
+    twitter: "https://twitter.com/",
+    github: "https://inboxs.me",
+    feedback: "https://inboxs.me",
+    discord: "https://discord.gg/",
+    oichat: "https://inboxs.me",
   },
   mailSupport: support_email,
   emailR2Domain: email_r2_domain,
@@ -30,16 +30,16 @@ export const footerLinks: SidebarNavItem[] = [
       { title: "About", href: "/docs" },
       { title: "Terms", href: "/terms" },
       { title: "Privacy", href: "/privacy" },
-      { title: "Blog", href: "https://www.oiov.dev" },
+      { title: "Blog", href: "https://inboxs.me" },
       { title: "Feedback", href: siteConfig.links.feedback },
     ],
   },
   {
     title: "Products",
     items: [
-      { title: "Vmail", href: "https://vmail.dev" },
-      { title: "Moise", href: "https://moise.oiov.dev" },
-      { title: "Iconce", href: "https://iconce.com" },
+      { title: "Vmail", href: "https://inboxs.me" },
+      { title: "Moise", href: "https://inboxs.me" },
+      { title: "Iconce", href: "https://inboxs.me" },
       { title: "OiChat", href: siteConfig.links.oichat },
     ],
   },

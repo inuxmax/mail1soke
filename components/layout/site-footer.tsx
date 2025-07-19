@@ -27,12 +27,10 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             </Link>
           </div>
           <div className="mt-4 text-sm">
-            Shorten links with analytics, manage emails, <br />
-            create private chats, and control subdomains
-            <br />
-            —all on one platform.
+          Rút gọn liên kết bằng công cụ phân tích, quản lý email, <br />
+          tạo cuộc trò chuyện riêng tư và kiểm soát tên miền phụ <br />
+          —tất cả trên một nền tảng.
           </div>
-          <GitHubStarsWithSuspense className="mt-4" owner="oiov" repo="wr.do" />
         </div>
         {footerLinks.map((section) => (
           <div key={section.title}>
