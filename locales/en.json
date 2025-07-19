@@ -275,7 +275,7 @@
     "Extract website metadata": "Extract website metadata",
     "Convert website content to Markdown format": "Convert website content to Markdown format",
     "Convert website content to text": "Convert website content to text",
-    "Temporary Emails": "Temporary Emails",
+    "Emails": "Emails",
     "Inbox": "Inbox",
     "Users": "Users",
     "Total Requests of APIs in Last 30 Days": "Total Requests of APIs in Last 30 Days",
@@ -401,7 +401,6 @@
     "metaInformationApiDescription": "🍥 Extract rich, structured web data effortlessly with our smart Meta Information API. Perfect for developers, businesses, or researchers, this tool offers seamless integration, third-party service access, and enhanced functionality.",
     "applyYourApiKey": "Apply your api key",
     "pricingTitle": "Pricing",
-    "Pricing": "Pricing",
     "pricingDescription": "Use it for free for yourself, upgrade when your team needs advanced control.",
     "freeTier": "Free",
     "freePrice": "$0/mo",
@@ -447,7 +446,7 @@
     "MENU": "Menu",
     "Dashboard": "Dashboard",
     "Short Urls": "Short Urls",
-    "Emails": "Emails",
+    "Emails": "Temporary Emails",
     "DNS Records": "DNS Records",
     "WRoom": "WRoom",
     "OPEN API": "OPEN API",
@@ -477,7 +476,8 @@
     "Log out": "Log out",
     "System Settings": "System Settings",
     "Cloud Storage": "Cloud Storage",
-    "Cloud Storage Manager": "Cloud Storage"
+    "Pricing": "Pricing",
+    "Cloud Storage Manager": "Cloud Storage Manager"
   },
   "Email": {
     "Search emails": "Search emails",
