@@ -9,9 +9,9 @@ export const sidebarLinks: SidebarNavItem[] = [
     title: "MENU",
     items: [
       { href: "/dashboard", icon: "dashboard", title: "Dashboard" },
+      { href: "/emails", icon: "mail", title: "Temporary Emails" },
       { href: "/dashboard/urls", icon: "link", title: "Short Urls" },
       { href: "/dashboard/records", icon: "globe", title: "DNS Records" },
-      { href: "/emails", icon: "mail", title: "Emails" },
       {
         href: "/dashboard/storage",
         icon: "storage",
@@ -94,6 +94,7 @@ export const sidebarLinks: SidebarNavItem[] = [
     title: "OPTIONS",
     items: [
       { href: "/dashboard/settings", icon: "userSettings", title: "Settings" },
+      { href: "/pricing", icon: "storage", title: "Pricing" },
       { href: "/docs", icon: "bookOpen", title: "Documentation" },
       {
         href: "/feedback",
