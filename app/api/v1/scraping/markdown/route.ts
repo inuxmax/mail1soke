@@ -95,7 +95,7 @@ export async function GET(req: Request) {
       content: markdown,
       format: "markdown",
       timestamp: Date.now(),
-      payload: `https://wr.do/api/v1/scraping/markdown?url=${link}&key=${custom_apiKey}`,
+      payload: `https://inboxs.me/api/v1/scraping/markdown?url=${link}&key=${custom_apiKey}`,
     });
   } catch (error) {
     console.log(error);

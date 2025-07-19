@@ -1,7 +1,7 @@
 <div align="center">
   <h1>WR.DO</h1>
   <p>
-    <a href="https://wr.do/docs/developer">开发文档</a> · <a href="https://wr.do/feedback">Feedback</a> · <a href="/README.md">English</a> | 简体中文
+    <a href="https://inboxs.me/docs/developer">开发文档</a> · <a href="https://inboxs.me/feedback">Feedback</a> · <a href="/README.md">English</a> | 简体中文
   </p>
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/oiov/wr.do?style=flat-square">
   <img src="https://img.shields.io/github/stars/oiov/wr.do.svg?logo=github&style=flat-square" alt="star"/>
@@ -15,7 +15,7 @@
 
 WR.DO 是一个一站式网络工具平台，集成短链服务、临时邮箱、子域名管理、文件存储和开放API接口。支持自定义链接、密码保护、访问统计；提供无限制临时邮箱收发；管理多域名DNS记录；支持云存储，对接 S3 API；内置网站截图、元数据提取等实用API。完整的管理后台，支持用户权限控制和服务配置。
 
-- 官网: [https://wr.do](https://wr.do)
+- 官网: [https://inboxs.me](https://inboxs.me)
 - Demo: [https://699399.xyz](https://699399.xyz) (账号: `admin@admin.com`, 密码: `123456`)
 
 ## 功能列表
@@ -76,22 +76,22 @@ WR.DO 是一个一站式网络工具平台，集成短链服务、临时邮箱�
 
 <table>
   <tr>
-    <td><img src="https://wr.do/_static/images/light-preview.png" /></td>
-    <td><img src="https://wr.do/_static/images/example_02.png" /></td>
+    <td><img src="https://inboxs.me/_static/images/light-preview.png" /></td>
+    <td><img src="https://inboxs.me/_static/images/example_02.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://wr.do/_static/images/example_01.png" /></td>
-    <td><img src="https://wr.do/_static/images/realtime-globe.png" /></td>
+    <td><img src="https://inboxs.me/_static/images/example_01.png" /></td>
+    <td><img src="https://inboxs.me/_static/images/realtime-globe.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://wr.do/_static/images/example_03.png" /></td>
-    <td><img src="https://wr.do/_static/images/domains.png" /></td>
+    <td><img src="https://inboxs.me/_static/images/example_03.png" /></td>
+    <td><img src="https://inboxs.me/_static/images/domains.png" /></td>
   </tr>
 </table>
 
 ## 快速开始
 
-查看开发者[快速开始](https://wr.do/docs/developer/quick-start)详细文档。
+查看开发者[快速开始](https://inboxs.me/docs/developer/quick-start)详细文档。
 
 ## 自部署教程
 
@@ -144,7 +144,7 @@ pnpm dev
 
 ## 环境变量
 
-查看 [开发者文档](https://wr.do/docs/developer).
+查看 [开发者文档](https://inboxs.me/docs/developer).
 
 ## 技术栈
 
@@ -164,14 +164,14 @@ pnpm dev
 - 🚨 **智能错误处理** - 同步失败时自动创建详细的 Issue
 - 🧹 **自动清理通知** - 自动关闭之前的同步失败 Issue
 
-前往[如何手动触发同步](https://wr.do/docs/developer/sync)查看详细文档。
+前往[如何手动触发同步](https://inboxs.me/docs/developer/sync)查看详细文档。
 
 ## 社区群组
 
 - Discord: https://discord.gg/AHPQYuZu3m
 - 微信群：
 
-<img width="300" src="https://wr.do/s/group" />
+<img width="300" src="https://inboxs.me/s/group" />
 
 ## 许可证
 

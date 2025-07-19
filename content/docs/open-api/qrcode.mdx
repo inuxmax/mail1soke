@@ -8,7 +8,7 @@ This API allows you to create QR codes with customizable options such as size, c
 ## API Endpoint
 
 **Base URL:**
-https://wr.do/api/v1/scraping/qrcode
+https://inboxs.me/api/v1/scraping/qrcode
 
 
 **HTTP Methods:**
@@ -21,7 +21,7 @@ https://wr.do/api/v1/scraping/qrcode
 ### Basic Request Format
 
 ```bash
-https://wr.do/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com
+https://inboxs.me/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com
 ```
 
 ### Authentication
@@ -74,25 +74,25 @@ https://wr.do/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com
 ### Basic QR Code
 Generate a default QR code for a URL:
 ```bash
-https://wr.do/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com
+https://inboxs.me/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com
 ```
 
 ### Custom Size and Colors
 Create a 400x400 QR code with a blue foreground and yellow background:
 ```bash
-https://wr.do/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&size=400&fgColor=%230066FF&bgColor=%23FFFF00
+https://inboxs.me/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&size=400&fgColor=%230066FF&bgColor=%23FFFF00
 ```
 
 ### With Custom Logo and High Error Correction
 Add a custom logo and use high error correction (`H`):
 ```bash
-https://wr.do/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&logo=https://your-logo-url.com/logo.png&level=H
+https://inboxs.me/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&logo=https://your-logo-url.com/logo.png&level=H
 ```
 
 ### Hide Logo and Add Margin
 Hide the logo and add a larger margin:
 ```bash
-https://wr.do/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&hideLogo=true&margin=10
+https://inboxs.me/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&hideLogo=true&margin=10
 ```
 
 ## Embedding in HTML
@@ -100,7 +100,7 @@ You can directly use the API URL in an `<img>` tag to display the QR code:
 
 ```html
 <img
-  src="https://wr.do/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&size=300&fgColor=%230000FF"
+  src="https://inboxs.me/api/v1/scraping/qrcode?key=your_api_key&url=https://example.com&size=300&fgColor=%230000FF"
   alt="QR Code for example.com"
 />
 ```

@@ -167,7 +167,7 @@ export default function PasswordPrompt() {
         Powered by{" "}
         <Link
           className="hover:underline"
-          href={"https://wr.do"}
+          href={"https://inboxs.me"}
           target="_blank"
           style={{ fontFamily: "Bahamas Bold" }}
         >

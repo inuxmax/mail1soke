@@ -75,7 +75,7 @@ export async function GET(req: Request) {
     const icon =
       $("link[rel='icon']").attr("href") ||
       $("link[rel='apple-touch-icon']").attr("href") ||
-      `https://icon.wr.do/${removeUrlSuffix(link)}.ico`;
+      `https://icon.inboxs.me/${removeUrlSuffix(link)}.ico`;
     const lang =
       $("html").attr("lang") ||
       $("html").attr("xml:lang") ||
@@ -113,7 +113,7 @@ export async function GET(req: Request) {
       lang,
       author,
       timestamp: Date.now(),
-      payload: `https://wr.do/api/v1/scraping/meta?url=${link}&key=${custom_apiKey}`,
+      payload: `https://inboxs.me/api/v1/scraping/meta?url=${link}&key=${custom_apiKey}`,
     });
   } catch (error) {
     console.log(error);

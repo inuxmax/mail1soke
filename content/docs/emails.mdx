@@ -11,7 +11,7 @@ description: Create and manage your emails.
 
 We provide a free email service for users to send and receive emails. Users can generate a unique email address and use it to send and receive emails. 
 
-Start using the email service at https://wr.do/emails !
+Start using the email service at https://inboxs.me/emails !
 
 
 ## How it works
@@ -51,7 +51,7 @@ curl -X POST \
   -d '{
     "emailAddress": "your-suffix@wr.do"
   }' \
-  https://wr.do/api/v1/email
+  https://inboxs.me/api/v1/email
 ```
 
 #### Request Body (Params)
@@ -101,7 +101,7 @@ The `GET /api/v1/email/inbox` endpoint allows you to retrieve all forwarded emai
 ```bash
 curl -X GET \
   -H "wrdo-api-key: YOUR_API_KEY" \
-  "https://wr.do/api/v1/email/inbox?emailAddress=your-suffix@wr.do&page=1&size=10"
+  "https://inboxs.me/api/v1/email/inbox?emailAddress=your-suffix@wr.do&page=1&size=10"
 ```
 
 #### Query Parameters
@@ -162,5 +162,5 @@ curl -X DELETE \
   -d '{
     "emailAddress": "your-suffix@wr.do"
   }' \
-  "https://wr.do/api/v1/email"
+  "https://inboxs.me/api/v1/email"
 ```

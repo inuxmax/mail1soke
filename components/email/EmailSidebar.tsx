@@ -620,7 +620,7 @@ export default function EmailSidebar({
                         setDomainSuffix(value);
                       }}
                       name="suffix"
-                      defaultValue={domainSuffix || "wr.do"}
+                      defaultValue={domainSuffix || "Inboxs.me"}
                       disabled={isEdit}
                     >
                       <SelectTrigger className="w-1/3 rounded-none border-x-0 shadow-inner">
