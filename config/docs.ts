@@ -17,7 +17,7 @@ export const docsConfig: DocsConfig = {
           icon: "page",
         },
         {
-          title: "Emails",
+          title: "Email",
           href: "/docs/emails",
           icon: "page",
         },
