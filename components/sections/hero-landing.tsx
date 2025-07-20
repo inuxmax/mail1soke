@@ -80,7 +80,7 @@ export default function HeroLanding({
           </Link>
         </div>
 
-        <UrlShortener />
+        <EmailManagerExp />
       </div>
     </section>
   );
@@ -228,7 +228,8 @@ export function LandingImages() {
       </div>
 
       <div className="grids grids-dark mx-auto my-10 flex w-full max-w-6xl px-4">
-        <EmailManagerExp />
+      <UrlShortener />
+       
       </div>
     </>
   );
