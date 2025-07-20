@@ -37,10 +37,8 @@ export const footerLinks: SidebarNavItem[] = [
   {
     title: "Products",
     items: [
-      { title: "Vmail", href: "https://Mail1s.net" },
-      { title: "Moise", href: "https://Mail1s.net" },
-      { title: "Iconce", href: "https://Mail1s.net" },
-      { title: "OiChat", href: siteConfig.links.oichat },
+      { title: "MMO4ME.VN", href: "https://mmo4me.vn" },
+      { title: "Chommo.net", href: "https://Chommo.net" },
     ],
   },
   {
