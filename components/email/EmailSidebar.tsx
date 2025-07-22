@@ -177,6 +177,9 @@ export default function EmailSidebar({
   const userEmails = data?.list || [];
   const totalPages = data ? Math.ceil(data.total / pageSize) : 0;
 
+  // Gọi hook useTotalGmailInboxCount ở đầu hàm, không gọi trong JSX
+  const totalGmailInboxCount = useTotalGmailInboxCount(userEmails);
+
   const handleSubmitEmail = async (emailSuffix: string) => {
     const limit_len =
       emailDomains?.find((d) => d.domain_name === domainSuffix)
@@ -462,7 +465,7 @@ export default function EmailSidebar({
                 </p>
               </div>
               <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                {nFormatter((data ? data.totalInboxCount : 0) + useTotalGmailInboxCount(userEmails))}
+                {nFormatter((data ? data.totalInboxCount : 0) + totalGmailInboxCount)}
               </p>
             </div>
 
