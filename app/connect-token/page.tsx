@@ -106,9 +106,17 @@ function ConnectTokenPageContent() {
 
   // Thay GoogleLogin bằng custom button mở popup Google OAuth với prompt=select_account
   function openGoogleOAuthPopup() {
+    const SCOPES = [
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "email",
+      "profile"
+    ].join(" ");
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID_MULTI}` +
       `&redirect_uri=${GOOGLE_REDIRECT_URI}` +
-      `&response_type=token&scope=https://www.googleapis.com/auth/gmail.readonly%20email%20profile&prompt=select_account`;
+      `&response_type=code` +
+      `&scope=${encodeURIComponent(SCOPES)}` +
+      `&access_type=offline` +
+      `&prompt=consent`;
     window.open(url, '_blank', 'width=500,height=600');
   }
 
@@ -168,12 +176,13 @@ function ConnectTokenPageContent() {
 
   useEffect(() => {
     if (!savedEmails || savedEmails.length === 0) return;
-    const invalids = savedEmails.filter(email => tokenStatus[email] === 'invalid');
-    if (invalids.length > 0) {
-      invalids.forEach(email => {
-        handleDeleteEmail(email, setStatus, setError, reloadEmails);
-      });
-    }
+    // BỎ chức năng tự động xoá token khi accessToken hết hạn
+    // const invalids = savedEmails.filter(email => tokenStatus[email] === 'invalid');
+    // if (invalids.length > 0) {
+    //   invalids.forEach(email => {
+    //     handleDeleteEmail(email, setStatus, setError, reloadEmails);
+    //   });
+    // }
     // eslint-disable-next-line
   }, [tokenStatus, savedEmails]);
 

@@ -33,8 +33,27 @@ async function refreshAccessToken(refreshToken) {
 
 export async function GET() {
   try {
-    const data = await readFile(join(process.cwd(), 'tokens.json'), 'utf8');
-    return NextResponse.json(JSON.parse(data));
+    const tokensPath = join(process.cwd(), 'tokens.json');
+    const data = await readFile(tokensPath, 'utf8');
+    let tokens = JSON.parse(data);
+    let updated = false;
+    for (let i = 0; i < tokens.length; i++) {
+      const token = tokens[i];
+      if (token.accessToken && !(await isTokenValid(token.accessToken))) {
+        if (token.refreshToken) {
+          const newAccessToken = await refreshAccessToken(token.refreshToken);
+          if (newAccessToken) {
+            tokens[i].accessToken = newAccessToken;
+            tokens[i].time = new Date().toISOString();
+            updated = true;
+          }
+        }
+      }
+    }
+    if (updated) {
+      await writeFile(tokensPath, JSON.stringify(tokens, null, 2), 'utf8');
+    }
+    return NextResponse.json(tokens);
   } catch {
     return NextResponse.json([], { status: 200 });
   }
