@@ -5,7 +5,7 @@ description: 自动同步上游仓库代码，触发 Vercel 自动部署
 
 <DocsLang en="/docs/developer/sync" zh="/docs/developer/sync-zh" />
 
-本项目配置了与上游仓库 [oiov/wr.do](https://github.com/oiov/wr.do) 的同步工作流，支持：
+本项目配置了与上游仓库 [oiov/Mail1s.net](https://github.com/oiov/Mail1s.net) 的同步工作流，支持：
 
 - 🔄 **手动触发同步** - 默认关闭自动同步，完全控制同步时机
 - 💬 **同步后自动评论** - 在相关 commit 上添加详细的同步信息
@@ -27,10 +27,10 @@ description: 自动同步上游仓库代码，触发 Vercel 自动部署
 gh auth login
 
 # 触发同步工作流
-gh workflow run "上游同步 | Upstream Sync" --repo your-username/wr.do
+gh workflow run "上游同步 | Upstream Sync" --repo your-username/Mail1s.net
 
 # 查看工作流运行状态
-gh run list --workflow="上游同步 | Upstream Sync" --repo your-username/wr.do
+gh run list --workflow="上游同步 | Upstream Sync" --repo your-username/Mail1s.net
 ```
 
 ### 同步状态查看
@@ -43,9 +43,9 @@ gh run list --workflow="上游同步 | Upstream Sync" --repo your-username/wr.do
 
 **合并冲突**: 如遇到合并冲突，需要手动解决：
 ```bash
-git clone https://github.com/your-username/wr.do.git
-cd wr.do
-git remote add upstream https://github.com/oiov/wr.do.git
+git clone https://github.com/your-username/Mail1s.net.git
+cd Mail1s.net
+git remote add upstream https://github.com/oiov/Mail1s.net.git
 git fetch upstream
 git merge upstream/main
 # 解决冲突后提交并推送

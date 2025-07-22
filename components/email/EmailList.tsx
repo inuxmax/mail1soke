@@ -34,6 +34,7 @@ import {
 import EmailDetail from "./EmailDetail";
 import Loader from "./Loader";
 import { SendEmailModal } from "./SendEmailModal";
+import GmailAliasInbox from "./GmailAliasInbox";
 
 interface EmailListProps {
   emailAddress: string | null;
@@ -169,6 +170,7 @@ export default function EmailList({
 
   return (
     <div className={cn("grids flex flex-1 flex-col", className)}>
+      {/* 1. Header INBOX */}
       <div className="flex items-center gap-2 bg-neutral-200/40 p-2 text-base font-semibold text-neutral-600 backdrop-blur dark:bg-neutral-800 dark:text-neutral-50">
         <Icons.inbox size={20} />
         <span>{t("INBOX")}</span>
@@ -271,6 +273,13 @@ export default function EmailList({
           )}
         </div>
       </div>
+      {/* 2. Gmail inbox nằm ngay bên dưới header */}
+      {emailAddress && emailAddress.endsWith("@gmail.com") && (
+        <div className="mb-6">
+          <GmailAliasInbox alias={emailAddress} />
+        </div>
+      )}
+      {/* 3. Danh sách email nội bộ, EmailDetail, ... */}
       {isLoading && (
         <div className="flex flex-col gap-2 p-1">
           {[...Array(9)].map((_, index) => (

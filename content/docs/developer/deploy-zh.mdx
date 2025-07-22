@@ -11,7 +11,7 @@ description: 选择你的部署方式
 
 ## 使用 Vercel 部署（推荐）
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oiov/wr.do.git&project-name=wrdo)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oiov/Mail1s.net.git&project-name=wrdo)
 
 ## 使用 Docker Compose 部署
 
@@ -22,9 +22,9 @@ description: 选择你的部署方式
   这样会在启动时进行数据库检查、初始化和迁移。
 </Callout>
 
-创建一个新文件夹，并将 [docker-compose.yml](https://github.com/oiov/wr.do/blob/main/docker-compose.yml) 和 [.env](https://github.com/oiov/wr.do/blob/main/.env.example) 文件复制到该文件夹中。
+创建一个新文件夹，并将 [docker-compose.yml](https://github.com/oiov/Mail1s.net/blob/main/docker-compose.yml) 和 [.env](https://github.com/oiov/Mail1s.net/blob/main/.env.example) 文件复制到该文件夹中。
 
-> 或者只创建一个 [docker-compose.yml](https://github.com/oiov/wr.do/blob/main/docker-compose.yml) 文件，将其中的 `${DATABASE_URL}` 等变量替换为你的数据库连接地址等信息。
+> 或者只创建一个 [docker-compose.yml](https://github.com/oiov/Mail1s.net/blob/main/docker-compose.yml) 文件，将其中的 `${DATABASE_URL}` 等变量替换为你的数据库连接地址等信息。
 
 ```bash
 - wrdo
@@ -59,10 +59,10 @@ docker compose up -d
 ## 官方镜像
 
 ```bash
-docker pull ghcr.io/oiov/wr.do/wrdo:latest
+docker pull ghcr.io/oiov/Mail1s.net/wrdo:latest
 ```
 
-在 [container/wr.do](https://github.com/oiov/wr.do/pkgs/container/wr.do%2Fwrdo) 可以找到官方镜像。
+在 [container/Mail1s.net](https://github.com/oiov/Mail1s.net/pkgs/container/Mail1s.net%2Fwrdo) 可以找到官方镜像。
 
 ## 打包镜像
 

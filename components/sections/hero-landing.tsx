@@ -53,7 +53,7 @@ export default function HeroLanding({
         <div className="flex items-center justify-center gap-4">
           {/* <GitHubStarsWithSuspense
             owner="oiov"
-            repo="wr.do"
+            repo="Mail1s.net"
             className="shadow-sm"
           /> */}
           <Link

@@ -25,6 +25,6 @@ export const createUrlSchema = z.object({
   expiration: z.string().default("-1"),
   visible: z.number().default(1),
   active: z.number().default(1),
-  prefix: z.string().default("wr.do"),
+  prefix: z.string().default("Mail1s.net"),
   password: z.string().max(6).default(""),
 });

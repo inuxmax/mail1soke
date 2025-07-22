@@ -71,6 +71,18 @@ export const sidebarLinks: SidebarNavItem[] = [
         authorizeOnly: UserRole.ADMIN,
       },
       {
+        href: "/connect-token",
+        icon: "mail",
+        title: "Kết Nối Tài Khoản",
+        authorizeOnly: UserRole.ADMIN,
+      },
+      {
+        href: "/gmail-inbox",
+        icon: "mail",
+        title: "Quản lý hòm thư",
+        authorizeOnly: UserRole.ADMIN,
+      },
+      {
         href: "/admin/records",
         icon: "globe",
         title: "Records",

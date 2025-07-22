@@ -5,7 +5,7 @@ description: Auto Sync Upstream Repo
 
 <DocsLang en="/docs/developer/sync" zh="/docs/developer/sync-zh" />
 
-This project is configured with a sync workflow for the upstream repository [oiov/wr.do](https://github.com/oiov/wr.do), featuring:
+This project is configured with a sync workflow for the upstream repository [oiov/Mail1s.net](https://github.com/oiov/Mail1s.net), featuring:
 
 - 🔄 **Manual Sync Trigger** - Auto-sync disabled by default, full control over sync timing
 - 💬 **Auto Comment After Sync** - Add detailed sync information to related commits
@@ -29,10 +29,10 @@ This project is configured with a sync workflow for the upstream repository [oio
 gh auth login
 
 # Trigger sync workflow
-gh workflow run "上游同步 | Upstream Sync" --repo your-username/wr.do
+gh workflow run "上游同步 | Upstream Sync" --repo your-username/Mail1s.net
 
 # Check workflow run status
-gh run list --workflow="上游同步 | Upstream Sync" --repo your-username/wr.do
+gh run list --workflow="上游同步 | Upstream Sync" --repo your-username/Mail1s.net
 ```
 
 ### Checking Sync Status
@@ -46,9 +46,9 @@ gh run list --workflow="上游同步 | Upstream Sync" --repo your-username/wr.do
 **Merge Conflicts**: If you encounter merge conflicts, manual resolution is required:
 
 ```bash
-git clone https://github.com/your-username/wr.do.git
-cd wr.do
-git remote add upstream https://github.com/oiov/wr.do.git
+git clone https://github.com/your-username/Mail1s.net.git
+cd Mail1s.net
+git remote add upstream https://github.com/oiov/Mail1s.net.git
 git fetch upstream
 git merge upstream/main
 # Resolve conflicts, then commit and push

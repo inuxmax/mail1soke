@@ -44,7 +44,7 @@ export async function getClientGeolocation(ip): Promise<GeoLocation | null> {
   // const new_headers = new Headers();
   // new_headers.set("X-Forwarded-For", ip);
   // new_headers.set("User-Agent", req.headers.get("user-agent") || "");
-  const response = await fetch(`https://ip.wr.do/api?ip=${ip}`);
+  const response = await fetch(`https://ip.Mail1s.net/api?ip=${ip}`);
   if (!response.ok) return null;
   return await response.json();
 }

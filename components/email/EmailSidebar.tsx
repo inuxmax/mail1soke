@@ -84,6 +84,57 @@ export default function EmailSidebar({
   const [onlyUnread, setOnlyUnread] = useState(false);
 
   const [showSendsModal, setShowSendsModal] = useState(false);
+  const [tempAlias, setTempAlias] = useState<string | null>(null);
+
+  // State cho modal tạo email mới
+  const [gmailAlias, setGmailAlias] = useState("");
+  const [gmailTokenEmail, setGmailTokenEmail] = useState("");
+  const [modalDomain, setModalDomain] = useState("gmail.com");
+  // Sửa lại useEffect lấy gmailTokenEmail: mỗi lần mở modal sẽ random 1 email đã kết nối
+  useEffect(() => {
+    fetch("/api/tokens")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          const randomIdx = Math.floor(Math.random() * data.length);
+          setGmailTokenEmail(data[randomIdx].email);
+        } else {
+          setGmailTokenEmail("");
+        }
+      })
+      .catch(() => setGmailTokenEmail(""));
+  }, [showEmailModal]);
+  useEffect(() => {
+    if (showEmailModal && modalDomain === "gmail.com" && gmailTokenEmail) {
+      setGmailAlias(generateAliasFromEmail(gmailTokenEmail));
+    } else {
+      setGmailAlias("");
+    }
+  }, [showEmailModal, modalDomain, gmailTokenEmail]);
+
+  useEffect(() => {
+    fetch("/tokens.json")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0 && data[0].email) {
+          // Sinh alias từ email đầu tiên
+          const [user, domain] = data[0].email.split("@");
+          let alias = user;
+          const positions: number[] = [];
+          while (positions.length < 2) {
+            const pos = Math.floor(Math.random() * (alias.length - 1)) + 1;
+            if (!positions.includes(pos)) positions.push(pos);
+          }
+          positions.sort((a, b) => a - b);
+          alias = alias.slice(0, positions[0]) + "." + alias.slice(positions[0]);
+          alias = alias.slice(0, positions[1] + 1) + "." + alias.slice(positions[1] + 1);
+          setTempAlias(alias + "@" + domain);
+        } else {
+          setTempAlias(null);
+        }
+      })
+      .catch(() => setTempAlias(null));
+  }, []);
 
   const [pageSize, setPageSize] = useState(10);
 
@@ -239,6 +290,80 @@ export default function EmailSidebar({
     }
   };
 
+  const DOMAINS = [
+    "gmail.com",
+  ];
+
+  function useGmailAliasCount(emailAddress: string | null) {
+    const [gmailCount, setGmailCount] = useState<number | null>(null);
+    useEffect(() => {
+      let interval: NodeJS.Timeout;
+      const fetchCount = () => {
+        if (!emailAddress || !emailAddress.endsWith("@gmail.com")) {
+          setGmailCount(null);
+          return;
+        }
+        fetch("/api/tokens")
+          .then(res => res.json())
+          .then((tokens: any[]) => {
+            if (!Array.isArray(tokens)) return;
+            const aliasUser = emailAddress.split("@")[0].replace(/\./g, "").split("+")[0];
+            const found = tokens.find(t => t.email.split("@")[0] === aliasUser);
+            if (!found) return;
+            fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?q=to:${emailAddress}`, {
+              headers: { Authorization: `Bearer ${found.accessToken}` },
+            })
+              .then(r => r.ok ? r.json() : Promise.reject())
+              .then(data => setGmailCount(data.resultSizeEstimate || 0))
+              .catch(() => setGmailCount(null));
+          });
+      };
+      fetchCount();
+      interval = setInterval(fetchCount, 15000);
+      return () => clearInterval(interval);
+    }, [emailAddress]);
+    return gmailCount;
+  }
+
+  function useTotalGmailInboxCount(userEmails) {
+    const [gmailTotal, setGmailTotal] = useState(0);
+    useEffect(() => {
+      const gmailAliases = userEmails.filter(e => e.emailAddress.endsWith("@gmail.com"));
+      if (gmailAliases.length === 0) {
+        setGmailTotal(0);
+        return;
+      }
+      fetch("/api/tokens")
+        .then(res => res.json())
+        .then((tokens) => {
+          Promise.all(
+            gmailAliases.map(alias => {
+              const aliasUser = alias.emailAddress.split("@")[0].replace(/\./g, "").split("+")[0];
+              const found = tokens.find(t => t.email.split("@")[0] === aliasUser);
+              if (!found) return 0;
+              return fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?q=to:${alias.emailAddress}`, {
+                headers: { Authorization: `Bearer ${found.accessToken}` },
+              })
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(data => data.resultSizeEstimate || 0)
+                .catch(() => 0);
+            })
+          ).then(counts => setGmailTotal(counts.reduce((a, b) => a + b, 0)));
+        });
+    }, [userEmails]);
+    return gmailTotal;
+  }
+
+  function GmailCountLabel({ email }: { email: string }) {
+    const gmailCount = useGmailAliasCount(email);
+    if (gmailCount === null) return null;
+    return (
+      <span className="ml-2 text-xs text-blue-700 font-semibold">
+        {gmailCount} Gmail
+      </span>
+    );
+  }
+
   return (
     <div
       className={cn(`flex h-full flex-col border-r transition-all`, className)}
@@ -337,7 +462,7 @@ export default function EmailSidebar({
                 </p>
               </div>
               <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                {nFormatter(data ? data.totalInboxCount : 0)}
+                {nFormatter((data ? data.totalInboxCount : 0) + useTotalGmailInboxCount(userEmails))}
               </p>
             </div>
 
@@ -543,7 +668,13 @@ export default function EmailSidebar({
                   {email.unreadCount > 0 && (
                     <Badge variant="default">{email.unreadCount}</Badge>
                   )}
-                  {t("{email} recived", { email: email.count })}
+                  {email.emailAddress.endsWith("@gmail.com") ? (
+                    <GmailCountLabel email={email.emailAddress} />
+                  ) : (
+                    <span className="ml-2 text-xs text-gray-500">
+                      {t("{email} recived", { email: email.count })}
+                    </span>
+                  )}
                 </div>
                 <span className="line-clamp-1 hover:line-clamp-none">
                   {isAdminModel
@@ -589,8 +720,13 @@ export default function EmailSidebar({
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                const emailAddress = (e.target as any).emailAddress.value;
-                handleSubmitEmail(emailAddress);
+                let emailAddress = "";
+                if (modalDomain === "gmail.com" && gmailAlias) {
+                  emailAddress = gmailAlias;
+                } else {
+                  emailAddress = (e.target as any).emailAddress.value + "@" + modalDomain;
+                }
+                handleSubmitEmail(emailAddress.split("@")[0]);
               }}
             >
               <div className="mb-4">
@@ -607,43 +743,35 @@ export default function EmailSidebar({
                     type="text"
                     placeholder={t("Enter email prefix")}
                     className="w-full rounded-r-none"
-                    required
-                    defaultValue={
-                      isEdit ? selectedEmailAddress?.split("@")[0] || "" : ""
-                    }
+                    required={modalDomain !== "gmail.com"}
+                    value={modalDomain === "gmail.com" && gmailAlias ? gmailAlias.split("@")[0] : undefined}
+                    defaultValue={isEdit ? selectedEmailAddress?.split("@")[0] || "" : ""}
+                    disabled={modalDomain === "gmail.com" && !!gmailAlias}
+                    onChange={modalDomain !== "gmail.com" ? (e) => {
+                      // Nếu không phải gmail.com thì cho phép nhập
+                      (document.getElementById("emailAddress") as HTMLInputElement).value = e.target.value;
+                    } : undefined}
                   />
-                  {isLoadingDomains ? (
-                    <Skeleton className="h-9 w-1/3 rounded-none border-x-0 shadow-inner" />
-                  ) : (
-                    <Select
-                      onValueChange={(value: string) => {
-                        setDomainSuffix(value);
-                      }}
-                      name="suffix"
-                      defaultValue={domainSuffix || "Mail1s.net"}
-                      disabled={isEdit}
-                    >
-                      <SelectTrigger className="w-1/3 rounded-none border-x-0 shadow-inner">
-                        <SelectValue placeholder="Select a domain" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {emailDomains && emailDomains.length > 0 ? (
-                          emailDomains.map((v) => (
-                            <SelectItem
-                              key={v.domain_name}
-                              value={v.domain_name}
-                            >
-                              @{v.domain_name}
-                            </SelectItem>
-                          ))
-                        ) : (
-                          <Button className="w-full" variant="ghost">
-                            {t("No domains configured")}
-                          </Button>
-                        )}
-                      </SelectContent>
-                    </Select>
-                  )}
+                  <Select
+                    onValueChange={(value: string) => {
+                      setDomainSuffix(value);
+                      setModalDomain(value);
+                    }}
+                    name="suffix"
+                    value={modalDomain}
+                    disabled={isEdit}
+                  >
+                    <SelectTrigger className="w-1/3 rounded-none border-x-0 shadow-inner">
+                      <SelectValue placeholder="Select a domain" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[...DOMAINS, ...(emailDomains?.map(d => d.domain_name).filter(d => d !== "gmail.com") || [])].map((d) => (
+                        <SelectItem key={d} value={d}>
+                          @{d}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <Button
                     className="rounded-l-none"
                     type="button"
@@ -651,11 +779,15 @@ export default function EmailSidebar({
                     variant="outline"
                     disabled={isEdit}
                     onClick={() => {
-                      (
-                        document.getElementById(
-                          "emailAddress",
-                        ) as HTMLInputElement
-                      ).value = randomName("", ".");
+                      if (modalDomain === "gmail.com" && gmailTokenEmail) {
+                        setGmailAlias(generateAliasFromEmail(gmailTokenEmail));
+                      } else {
+                        (
+                          document.getElementById(
+                            "emailAddress",
+                          ) as HTMLInputElement
+                        ).value = randomName("", ".");
+                      }
                     }}
                   >
                     <Sparkles className="h-4 w-4 text-slate-500" />
@@ -735,4 +867,19 @@ export default function EmailSidebar({
       )}
     </div>
   );
+}
+
+function generateAliasFromEmail(email: string) {
+  const [user, domain] = email.split("@");
+  if (!user || !domain) return email;
+  let alias = user;
+  const positions: number[] = [];
+  while (positions.length < 2) {
+    const pos = Math.floor(Math.random() * (alias.length - 1)) + 1;
+    if (!positions.includes(pos)) positions.push(pos);
+  }
+  positions.sort((a, b) => a - b);
+  alias = alias.slice(0, positions[0]) + "." + alias.slice(positions[0]);
+  alias = alias.slice(0, positions[1] + 1) + "." + alias.slice(positions[1] + 1);
+  return alias + "@" + domain;
 }

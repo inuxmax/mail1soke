@@ -19,7 +19,7 @@ description: Create and manage your short URLs.
 - **Clicks**: The number of times the short link has been clicked.
 - **Visitors**: The number of unique visitors who have visited the short link.
 
-WR.DO provides a simple access statistics feature that can be used to track the click count and visitor count of the short link.
+Mail1s.net provides a simple access statistics feature that can be used to track the click count and visitor count of the short link.
 
 ## Expiration
 
@@ -48,7 +48,7 @@ curl -X POST \
     "target": "https://www.oiov.dev",
     "url": "abc123",
     "expiration": "-1",
-    "prefix": "wr.do",
+    "prefix": "Mail1s.net",
     "visible": 1,
     "active": 1,
     "password": ""
@@ -63,7 +63,7 @@ curl -X POST \
   "target": "https://www.oiov.dev", // required
   "url": "abc123", // required, slug
   "expiration": "-1", // optional, seconds, default: "-1", "-1" means no expiration; "60" means 60 seconds
-  "prefix": "wr.do", // optional, default: wr.do
+  "prefix": "Mail1s.net", // optional, default: Mail1s.net
   "visible": 1, // optional, default: 1, 1: visible, 0: invisible
   "active": 1, // optional, default: 1, 1: active, 0: inactive
   "password": "" // optional, max length: 6
@@ -85,7 +85,7 @@ Add the header `wrdo-api-key: YOUR_API_KEY` to your request.
   "userName": "string",
   "target": "https://www.example.com",
   "url": "abc123",
-  "prefix": "wr.do",
+  "prefix": "Mail1s.net",
   "visible": 1,
   "active": 1,
   "expiration": "-1",

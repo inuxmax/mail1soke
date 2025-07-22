@@ -15,6 +15,9 @@ COPY . .
 
 RUN pnpm i --frozen-lockfile
 
+# Cài thêm các package Google OAuth/API cần thiết
+RUN pnpm add googleapis @react-oauth/google jwt-decode
+
 FROM base AS builder
 WORKDIR /app
 

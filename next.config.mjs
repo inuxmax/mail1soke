@@ -35,7 +35,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "email-attachment.wr.do",
+        hostname: "email-attachment.Mail1s.net",
       },
       {
         protocol: "http",
@@ -43,7 +43,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "wr.do",
+        hostname: "Mail1s.net",
       },
     ],
   },
