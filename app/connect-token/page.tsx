@@ -63,14 +63,26 @@ function ConnectTokenPageContent() {
     }
   };
 
+  // Thêm hàm tự giải mã JWT không cần thư viện ngoài
+  function decodeJwtPayload(token: string) {
+    const payload = token.split('.')[1];
+    if (!payload) return {};
+    const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const padded = base64 + '='.repeat((4 - base64.length % 4) % 4);
+    try {
+      return JSON.parse(typeof window !== 'undefined' ? atob(padded) : Buffer.from(padded, 'base64').toString('utf-8'));
+    } catch {
+      return {};
+    }
+  }
+
   // Multi-account: Đăng nhập Google mới, lấy accessToken/email và lưu
   const handleGoogleLogin = async (credentialResponse: any) => {
     setStatus("");
     setError("");
     try {
-      // Dynamic import jwt-decode để tránh lỗi default export
-      const jwt_decode_mod = await import("jwt-decode");
-      const decoded: any = (jwt_decode_mod.default as any)(credentialResponse.credential);
+      // Giải mã credential để lấy email (không cần jwt-decode)
+      const decoded: any = decodeJwtPayload(credentialResponse.credential);
       const email = decoded.email;
       const accessToken = credentialResponse.credential;
       if (!accessToken || !email) {
