@@ -1,19 +1,19 @@
 <div align="center">
-  <h1>Mail1s.net</h1>
+  <h1>WR.DO</h1>
   <p>
     <a href="https://Mail1s.net/docs/developer">开发文档</a> · <a href="https://Mail1s.net/feedback">Feedback</a> · <a href="/README.md">English</a> | 简体中文
   </p>
-  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/oiov/Mail1s.net?style=flat-square">
-  <img src="https://img.shields.io/github/stars/oiov/Mail1s.net.svg?logo=github&style=flat-square" alt="star"/>
-  <img alt="GitHub forks" src="https://img.shields.io/github/forks/oiov/Mail1s.net?style=flat-square">
-  <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/oiov/Mail1s.net?style=flat-square"> <br>
-  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/oiov/Mail1s.net/docker-build-push.yml?style=flat-square">
-	<img src="https://img.shields.io/github/license/oiov/Mail1s.net?style=flat-square" alt="MIT"/>
+  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/oiov/wr.do?style=flat-square">
+  <img src="https://img.shields.io/github/stars/oiov/wr.do.svg?logo=github&style=flat-square" alt="star"/>
+  <img alt="GitHub forks" src="https://img.shields.io/github/forks/oiov/wr.do?style=flat-square">
+  <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/oiov/wr.do?style=flat-square"> <br>
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/oiov/wr.do/docker-build-push.yml?style=flat-square">
+	<img src="https://img.shields.io/github/license/oiov/wr.do?style=flat-square" alt="MIT"/>
 </div>
 
 ## 简介
 
-Mail1s.net 是一个一站式网络工具平台，集成短链服务、临时邮箱、子域名管理、文件存储和开放API接口。支持自定义链接、密码保护、访问统计；提供无限制临时邮箱收发；管理多域名DNS记录；支持云存储，对接 S3 API；内置网站截图、元数据提取等实用API。完整的管理后台，支持用户权限控制和服务配置。
+WR.DO 是一个一站式网络工具平台，集成短链服务、临时邮箱、子域名管理、文件存储和开放API接口。支持自定义链接、密码保护、访问统计；提供无限制临时邮箱收发；管理多域名DNS记录；支持云存储，对接 S3 API；内置网站截图、元数据提取等实用API。完整的管理后台，支持用户权限控制和服务配置。
 
 - 官网: [https://Mail1s.net](https://Mail1s.net)
 - Demo: [https://699399.xyz](https://699399.xyz) (账号: `admin@admin.com`, 密码: `123456`)
@@ -97,7 +97,7 @@ Mail1s.net 是一个一站式网络工具平台，集成短链服务、临时邮
 
 ### 使用 Vercel 部署
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oiov/Mail1s.net.git&project-name=wrdo)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oiov/wr.do.git&project-name=wrdo)
 
 记得填写必要的环境变量。
 
@@ -114,8 +114,8 @@ docker compose up -d
 将 `.env.example` 复制为 `.env` 并填写必要的环境变量。
 
 ```bash
-git clone https://github.com/oiov/Mail1s.net
-cd Mail1s.net
+git clone https://github.com/oiov/wr.do
+cd wr.do
 pnpm install
 ```
 
@@ -157,7 +157,7 @@ pnpm dev
 
 ## Fork 仓库同步
 
-本项目配置了与上游仓库 [oiov/Mail1s.net](https://github.com/oiov/Mail1s.net) 的同步工作流，支持：
+本项目配置了与上游仓库 [oiov/wr.do](https://github.com/oiov/wr.do) 的同步工作流，支持：
 
 - 🔄 **手动触发同步** - 默认关闭自动同步，完全控制同步时机
 - 💬 **同步后自动评论** - 在相关 commit 上添加详细的同步信息
@@ -179,10 +179,10 @@ pnpm dev
 
 ## Star History
 
-<a href="https://star-history.com/#oiov/Mail1s.net&Date">
+<a href="https://star-history.com/#oiov/wr.do&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=oiov/Mail1s.net&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=oiov/Mail1s.net&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=oiov/Mail1s.net&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=oiov/wr.do&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=oiov/wr.do&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=oiov/wr.do&type=Date" />
  </picture>
 </a>

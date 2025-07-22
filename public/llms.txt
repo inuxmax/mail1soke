@@ -1,46 +1,46 @@
-## Mail1s.net Overview
+## WR.DO Overview
 
-> Mail1s.net is a platform designed for developers, offering various tools and documentation aimed at simplifying web application development. The website provides resources on authentication, cloud integration, email handling, and more, establishing a comprehensive guide for users to effectively utilize its services. With examples and quick-start guides, it supports developers in implementing features quickly and efficiently.
+> Wr.do is a platform designed for developers, offering various tools and documentation aimed at simplifying web application development. The website provides resources on authentication, cloud integration, email handling, and more, establishing a comprehensive guide for users to effectively utilize its services. With examples and quick-start guides, it supports developers in implementing features quickly and efficiently.
 
-- [Mail1s.net](https://Mail1s.net/): Shorten links with analytics, manage emails and control subdomains—all on one platform.
-- [Introduction – Mail1s.net](https://Mail1s.net/docs): Welcome to the Mail1s.net documentation.
+- [WR.DO](https://Mail1s.net/): Shorten links with analytics, manage emails and control subdomains—all on one platform.
+- [Introduction – WR.DO](https://Mail1s.net/docs): Welcome to the WR.DO documentation.
 
 ## Documentation
-- [Authentification – Mail1s.net](https://Mail1s.net/docs/developer/authentification): How to config the authentification.
-- [Cloudflare Configs – Mail1s.net](https://Mail1s.net/docs/developer/cloudflare): How to config the cloudflare api.
-- [Cloudflare Email Worker Configs – Mail1s.net](https://Mail1s.net/docs/developer/cloudflare-email-worker): How to config the cloudflare api.
-- [Components – Mail1s.net](https://Mail1s.net/docs/developer/components): Use React components in Markdown using MDX.
-- [Config Files – Mail1s.net](https://Mail1s.net/docs/developer/config-files): Make it your own with config files.
-- [Database – Mail1s.net](https://Mail1s.net/docs/developer/database): How to config your Neon database.
-- [Email – Mail1s.net](https://Mail1s.net/docs/developer/email): How to manage emails in this project.
-- [Installation – Mail1s.net](https://Mail1s.net/docs/developer/installation): How to install the project.
-- [Markdown Files – Mail1s.net](https://Mail1s.net/docs/developer/markdown-files): How works blog and docs.
-- [Quick Start for Developer – Mail1s.net](https://Mail1s.net/docs/developer/quick-start): Step by step installation
-- [DNS Records – Mail1s.net](https://Mail1s.net/docs/dns-records): Create and manage your DNS records.
-- [Emails – Mail1s.net](https://Mail1s.net/docs/emails): Create and manage your emails.
-- [Cloudflare Pages & Workers Custom Domain – Mail1s.net](https://Mail1s.net/docs/examples/cloudflare): Free parsing of Cloudflare Pages & Workers custom domain names.
-- [Other Platforms – Mail1s.net](https://Mail1s.net/docs/examples/other): Free parsing custom domain names.
-- [Vercel Custom Domain – Mail1s.net](https://Mail1s.net/docs/examples/vercel): Free parsing of Vercel custom domain names.
-- [Zeabur Custom Domain – Mail1s.net](https://Mail1s.net/docs/examples/zeabur): Free parsing of Zeabur custom domain names.
-- [Open API – Mail1s.net](https://Mail1s.net/docs/open-api): Some open APIs for Mail1s.net. It's free and unlimited to use!
-- [Svg Icon API – Mail1s.net](https://Mail1s.net/docs/open-api/icon): Simple way to generate your svg icon
-- [Url to Markdown API – Mail1s.net](https://Mail1s.net/docs/open-api/markdown): Extract website content and convert it to Markdown format
-- [Meta Scraping API – Mail1s.net](https://Mail1s.net/docs/open-api/meta-info): Extract website meta information
-- [Qr Code API – Mail1s.net](https://Mail1s.net/docs/open-api/qrcode): Generate customizable QR codes for any URL
-- [Screenshot API – Mail1s.net](https://Mail1s.net/docs/open-api/screenshot): Capture website screenshots
-- [Url to Text API – Mail1s.net](https://Mail1s.net/docs/open-api/text): Extract website content and convert it to Text format
-- [Team Plan – Mail1s.net](https://Mail1s.net/docs/plan): Three different plans to choose from
-- [Quick Start Guide – Mail1s.net](https://Mail1s.net/docs/quick-start): Get started with the Mail1s.net documentation.
-- [Short URLs – Mail1s.net](https://Mail1s.net/docs/short-urls): Create and manage your short URLs.
-- [WRoom – Mail1s.net](https://Mail1s.net/docs/wroom): A temporary, peer-to-peer, and secure chat room
+- [Authentification – WR.DO](https://Mail1s.net/docs/developer/authentification): How to config the authentification.
+- [Cloudflare Configs – WR.DO](https://Mail1s.net/docs/developer/cloudflare): How to config the cloudflare api.
+- [Cloudflare Email Worker Configs – WR.DO](https://Mail1s.net/docs/developer/cloudflare-email-worker): How to config the cloudflare api.
+- [Components – WR.DO](https://Mail1s.net/docs/developer/components): Use React components in Markdown using MDX.
+- [Config Files – WR.DO](https://Mail1s.net/docs/developer/config-files): Make it your own with config files.
+- [Database – WR.DO](https://Mail1s.net/docs/developer/database): How to config your Neon database.
+- [Email – WR.DO](https://Mail1s.net/docs/developer/email): How to manage emails in this project.
+- [Installation – WR.DO](https://Mail1s.net/docs/developer/installation): How to install the project.
+- [Markdown Files – WR.DO](https://Mail1s.net/docs/developer/markdown-files): How works blog and docs.
+- [Quick Start for Developer – WR.DO](https://Mail1s.net/docs/developer/quick-start): Step by step installation
+- [DNS Records – WR.DO](https://Mail1s.net/docs/dns-records): Create and manage your DNS records.
+- [Emails – WR.DO](https://Mail1s.net/docs/emails): Create and manage your emails.
+- [Cloudflare Pages & Workers Custom Domain – WR.DO](https://Mail1s.net/docs/examples/cloudflare): Free parsing of Cloudflare Pages & Workers custom domain names.
+- [Other Platforms – WR.DO](https://Mail1s.net/docs/examples/other): Free parsing custom domain names.
+- [Vercel Custom Domain – WR.DO](https://Mail1s.net/docs/examples/vercel): Free parsing of Vercel custom domain names.
+- [Zeabur Custom Domain – WR.DO](https://Mail1s.net/docs/examples/zeabur): Free parsing of Zeabur custom domain names.
+- [Open API – WR.DO](https://Mail1s.net/docs/open-api): Some open APIs for WR.DO. It's free and unlimited to use!
+- [Svg Icon API – WR.DO](https://Mail1s.net/docs/open-api/icon): Simple way to generate your svg icon
+- [Url to Markdown API – WR.DO](https://Mail1s.net/docs/open-api/markdown): Extract website content and convert it to Markdown format
+- [Meta Scraping API – WR.DO](https://Mail1s.net/docs/open-api/meta-info): Extract website meta information
+- [Qr Code API – WR.DO](https://Mail1s.net/docs/open-api/qrcode): Generate customizable QR codes for any URL
+- [Screenshot API – WR.DO](https://Mail1s.net/docs/open-api/screenshot): Capture website screenshots
+- [Url to Text API – WR.DO](https://Mail1s.net/docs/open-api/text): Extract website content and convert it to Text format
+- [Team Plan – WR.DO](https://Mail1s.net/docs/plan): Three different plans to choose from
+- [Quick Start Guide – WR.DO](https://Mail1s.net/docs/quick-start): Get started with the WR.DO documentation.
+- [Short URLs – WR.DO](https://Mail1s.net/docs/short-urls): Create and manage your short URLs.
+- [WRoom – WR.DO](https://Mail1s.net/docs/wroom): A temporary, peer-to-peer, and secure chat room
 
 ## Pricing and Plans
-- [Pricing Plans – Mail1s.net](https://Mail1s.net/pricing): Three different plans to choose from
-- [Team Plan – Mail1s.net](https://Mail1s.net/docs/plan): Three different plans to choose from
+- [Pricing Plans – WR.DO](https://Mail1s.net/pricing): Three different plans to choose from
+- [Team Plan – WR.DO](https://Mail1s.net/docs/plan): Three different plans to choose from
 
 ## Privacy and Legal
-- [Privacy – Mail1s.net](https://Mail1s.net/privacy): The Privacy Policy for Mail1s.net.
-- [Terms & Conditions – Mail1s.net](https://Mail1s.net/terms): Read our terms and conditions.
+- [Privacy – WR.DO](https://Mail1s.net/privacy): The Privacy Policy for WR.DO.
+- [Terms & Conditions – WR.DO](https://Mail1s.net/terms): Read our terms and conditions.
 
 ## Login and Access
 - [Login](https://Mail1s.net/login): Login to your account

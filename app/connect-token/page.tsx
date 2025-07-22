@@ -3,7 +3,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 import { useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 

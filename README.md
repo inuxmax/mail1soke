@@ -1,17 +1,17 @@
 <div align="center">
-  <h1>Mail1s.net</h1>
+  <h1>WR.DO</h1>
   <p><a href="https://Mail1s.net/docs/developer">Docs</a> · <a href="https://Mail1s.net/feedback">Feedback</a> · English | <a href="/README-zh.md">简体中文</a></p>
-  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/oiov/Mail1s.net?style=flat-square">
-  <img src="https://img.shields.io/github/stars/oiov/Mail1s.net.svg?logo=github&style=flat-square" alt="star"/>
-  <img alt="GitHub forks" src="https://img.shields.io/github/forks/oiov/Mail1s.net?style=flat-square">
-  <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/oiov/Mail1s.net?style=flat-square"> <br>
-  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/oiov/Mail1s.net/docker-build-push.yml?style=flat-square">
-	<img src="https://img.shields.io/github/license/oiov/Mail1s.net?style=flat-square" alt="MIT"/>
+  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/oiov/wr.do?style=flat-square">
+  <img src="https://img.shields.io/github/stars/oiov/wr.do.svg?logo=github&style=flat-square" alt="star"/>
+  <img alt="GitHub forks" src="https://img.shields.io/github/forks/oiov/wr.do?style=flat-square">
+  <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/oiov/wr.do?style=flat-square"> <br>
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/oiov/wr.do/docker-build-push.yml?style=flat-square">
+	<img src="https://img.shields.io/github/license/oiov/wr.do?style=flat-square" alt="MIT"/>
 </div>
 
 ## Introduction
 
-Mail1s.net is a all-in-one web utility platform featuring short links with analytics, temporary email service, subdomain management, file storage, open APIs for screenshots and metadata extraction, and comprehensive admin dashboard.
+WR.DO is a all-in-one web utility platform featuring short links with analytics, temporary email service, subdomain management, file storage, open APIs for screenshots and metadata extraction, and comprehensive admin dashboard.
 
 - Official website: [https://Mail1s.net](https://Mail1s.net)
 - Demo: [https://699399.xyz](https://699399.xyz) (Account: `admin@admin.com`, Password: `123456`)
@@ -96,13 +96,13 @@ See step by step installation tutorial at [Quick Start for Developer](https://Ma
 
 ### Deploy with Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oiov/Mail1s.net.git&project-name=wrdo)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oiov/wr.do.git&project-name=wrdo)
 
 Remember to fill in the necessary environment variables.
 
 ### Deploy with Docker Compose
 
-Create a new folder and copy the [`docker-compose.yml`](https://github.com/oiov/Mail1s.net/blob/main/docker-compose.yml)、[`.env`](https://github.com/oiov/Mail1s.net/blob/main/.env.example) file to the folder.
+Create a new folder and copy the [`docker-compose.yml`](https://github.com/oiov/wr.do/blob/main/docker-compose.yml)、[`.env`](https://github.com/oiov/wr.do/blob/main/.env.example) file to the folder.
 
 ```yml
 - wrdo
@@ -119,8 +119,8 @@ docker compose up -d
 ## Local development
 
 ```bash
-git clone https://github.com/oiov/Mail1s.net
-cd Mail1s.net
+git clone https://github.com/oiov/wr.do
+cd wr.do
 pnpm install
 ```
 
@@ -149,7 +149,7 @@ Follow https://localhost:3000/setup
 
 ## Deploy with Edgeone
 
-[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Foiov%2FMail1s.net)
+[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Foiov%2Fwr.do)
 
 ## Environment Variables
 
@@ -166,7 +166,7 @@ Via [Installation For Developer](https://Mail1s.net/docs/developer).
 
 ## Fork Repository Sync
 
-This project is configured with a sync workflow for the upstream repository [oiov/Mail1s.net](https://github.com/oiov/Mail1s.net), featuring:
+This project is configured with a sync workflow for the upstream repository [oiov/wr.do](https://github.com/oiov/wr.do), featuring:
 
 - 🔄 **Manual Sync Trigger** - Auto-sync disabled by default, full control over sync timing
 - 💬 **Auto Comment After Sync** - Add detailed sync information to related commits
@@ -188,10 +188,10 @@ See [How to Trigger Sync](https://Mail1s.net/docs/developer/sync) for details.
 
 ## Star History
 
-<a href="https://star-history.com/#oiov/Mail1s.net&Date">
+<a href="https://star-history.com/#oiov/wr.do&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=oiov/Mail1s.net&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=oiov/Mail1s.net&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=oiov/Mail1s.net&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=oiov/wr.do&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=oiov/wr.do&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=oiov/wr.do&type=Date" />
  </picture>
 </a>
