@@ -68,8 +68,9 @@ function ConnectTokenPageContent() {
     setStatus("");
     setError("");
     try {
-      // Giải mã credential để lấy email
-      const decoded: any = (jwt_decode as any)(credentialResponse.credential);
+      // Dynamic import jwt-decode để tránh lỗi default export
+      const jwt_decode_mod = await import("jwt-decode");
+      const decoded: any = (jwt_decode_mod.default as any)(credentialResponse.credential);
       const email = decoded.email;
       const accessToken = credentialResponse.credential;
       if (!accessToken || !email) {
