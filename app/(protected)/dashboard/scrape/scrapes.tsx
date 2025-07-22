@@ -57,7 +57,7 @@ export function ScreenshotScraping({
 
   const [isShoting, setIsShoting] = useState(false);
   const [currentScreenshotLink, setCurrentScreenshotLink] =
-    useState("vmail.dev");
+    useState("Mail1s.net");
   const [screenshotInfo, setScreenshotInfo] = useState({
     tmp_url: "",
     payload: "",
@@ -469,7 +469,7 @@ export function QrCodeScraping({
 
   const [isShoting, setIsShoting] = useState(false);
   const [currentScreenshotLink, setCurrentScreenshotLink] =
-    useState("vmail.dev");
+    useState("Mail1s.net");
   const [qrInfo, setQrInfo] = useState({
     // tmp_url: "",
     payload: "",
