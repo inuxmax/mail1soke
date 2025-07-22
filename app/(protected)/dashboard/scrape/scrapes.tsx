@@ -170,7 +170,7 @@ export function MetaScraping({
 }) {
   const t = useTranslations("Scrape");
   const { theme } = useTheme();
-  const [currentLink, setCurrentLink] = useState("wr.do");
+  const [currentLink, setCurrentLink] = useState("mail1s.net");
   const [protocol, setProtocol] = useState("https://");
   const [metaInfo, setMetaInfo] = useState<MetaScrapingProps>({
     title: "",
@@ -273,7 +273,7 @@ export function MarkdownScraping({
 }) {
   const t = useTranslations("Scrape");
   const { theme } = useTheme();
-  const [currentLink, setCurrentLink] = useState("wr.do");
+  const [currentLink, setCurrentLink] = useState("mail1s.net");
   const [protocol, setProtocol] = useState("https://");
   const [metaInfo, setMetaInfo] = useState<MarkdownScrapingProps>({
     url: "",
@@ -369,7 +369,7 @@ export function TextScraping({
 }) {
   const t = useTranslations("Scrape");
   const { theme } = useTheme();
-  const [currentLink, setCurrentLink] = useState("wr.do");
+  const [currentLink, setCurrentLink] = useState("mail1s.net");
   const [protocol, setProtocol] = useState("https://");
   const [metaInfo, setMetaInfo] = useState<MarkdownScrapingProps>({
     url: "",
