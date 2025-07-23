@@ -144,6 +144,7 @@ function ConnectTokenPageContent() {
     fetch('/api/tokens')
       .then(res => res.json())
       .then(data => {
+        console.log("Reloaded tokens:", data); // Log dữ liệu trả về để debug
         if (Array.isArray(data)) setSavedEmails(data.map((t: any) => t.email));
       });
   };
