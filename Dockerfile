@@ -28,7 +28,12 @@ RUN npm install -g pnpm
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ENV NODE_OPTIONS="--max_old_space_size=2048"
+ENV NEXT_PRIVATE_MAX_WORKERS=2
+
 RUN pnpm run build
+
+RUN pnpm approve-builds
 
 FROM base AS runner
 
