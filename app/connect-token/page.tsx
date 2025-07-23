@@ -130,7 +130,8 @@ function ConnectTokenPageContent() {
       });
       if (res.ok) {
         setStatus("Đã xoá tài khoản thành công!");
-        reload();
+        setSavedEmails(prev => prev.filter(e => e !== email)); // Xoá khỏi UI ngay
+        reload(); // Vẫn reload lại từ API để đồng bộ
       } else {
         setError("Lỗi khi xoá tài khoản!");
       }
