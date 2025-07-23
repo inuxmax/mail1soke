@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
-import { readFile } from 'fs/promises';
-import { join } from 'path';
-import { writeFile } from 'fs/promises';
+import { prisma } from '@/lib/db';
 
-async function isTokenValid(accessToken) {
+async function isTokenValid(accessToken: string) {
   try {
     const res = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/profile', {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -14,7 +12,7 @@ async function isTokenValid(accessToken) {
   }
 }
 
-async function refreshAccessToken(refreshToken) {
+async function refreshAccessToken(refreshToken: string) {
   const params = new URLSearchParams({
     client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID_MULTI || 'YOUR_GOOGLE_CLIENT_ID_MULTI',
     client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || 'YOUR_GOOGLE_CLIENT_SECRET',
@@ -33,9 +31,7 @@ async function refreshAccessToken(refreshToken) {
 
 export async function GET() {
   try {
-    const tokensPath = join(process.cwd(), 'tokens.json');
-    const data = await readFile(tokensPath, 'utf8');
-    let tokens = JSON.parse(data);
+    let tokens = await prisma.googleToken.findMany();
     let updated = false;
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
@@ -43,15 +39,19 @@ export async function GET() {
         if (token.refreshToken) {
           const newAccessToken = await refreshAccessToken(token.refreshToken);
           if (newAccessToken) {
+            await prisma.googleToken.update({
+              where: { email: token.email },
+              data: {
+                accessToken: newAccessToken,
+                time: new Date(),
+              },
+            });
             tokens[i].accessToken = newAccessToken;
-            tokens[i].time = new Date().toISOString();
+            tokens[i].time = new Date();
             updated = true;
           }
         }
       }
-    }
-    if (updated) {
-      await writeFile(tokensPath, JSON.stringify(tokens, null, 2), 'utf8');
     }
     return NextResponse.json(tokens);
   } catch {
