@@ -35,22 +35,27 @@ export async function GET() {
     let updated = false;
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
-      if (token.accessToken && !(await isTokenValid(token.accessToken))) {
-        if (token.refreshToken) {
-          const newAccessToken = await refreshAccessToken(token.refreshToken);
-          if (newAccessToken) {
-            await prisma.googleToken.update({
-              where: { email: token.email },
-              data: {
-                accessToken: newAccessToken,
-                time: new Date(),
-              },
-            });
-            tokens[i].accessToken = newAccessToken;
-            tokens[i].time = new Date();
-            updated = true;
+      try {
+        if (token.accessToken && !(await isTokenValid(token.accessToken))) {
+          if (token.refreshToken) {
+            const newAccessToken = await refreshAccessToken(token.refreshToken);
+            if (newAccessToken) {
+              await prisma.googleToken.update({
+                where: { email: token.email },
+                data: {
+                  accessToken: newAccessToken,
+                  time: new Date(),
+                },
+              });
+              tokens[i].accessToken = newAccessToken;
+              tokens[i].time = new Date();
+              updated = true;
+            }
           }
         }
+      } catch (e) {
+        // Nếu có lỗi khi kiểm tra token, vẫn giữ token trong danh sách
+        // Không throw, không bỏ qua bản ghi
       }
     }
     return NextResponse.json(tokens);
