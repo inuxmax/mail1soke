@@ -10,6 +10,6 @@ export async function POST(req: NextRequest) {
     await prisma.googleToken.delete({ where: { email } });
     return NextResponse.json({ success: true });
   } catch (e) {
-    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
+    return NextResponse.json({ error: e?.message || JSON.stringify(e) || "Lỗi server" }, { status: 500 });
   }
 } 
