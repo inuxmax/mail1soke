@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
     }
     try {
       await writeFile(TOKENS_PATH, JSON.stringify(tokens, null, 2), "utf8");
+      console.log('TOKENS_PATH (save-token):', TOKENS_PATH);
     } catch (err) {
       console.error('Lỗi ghi file tokens.json:', err);
       return NextResponse.json({ error: "Lỗi ghi file" }, { status: 500 });

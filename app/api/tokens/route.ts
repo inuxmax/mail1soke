@@ -33,6 +33,7 @@ async function refreshAccessToken(refreshToken) {
 export async function GET() {
   try {
     const tokensPath = resolve(process.cwd(), 'tokens.json');
+    console.log('TOKENS_PATH (tokens):', tokensPath);
     const data = await readFile(tokensPath, 'utf8');
     let tokens = JSON.parse(data);
     let updated = false;
@@ -57,7 +58,8 @@ export async function GET() {
       }
     }
     return NextResponse.json(tokens);
-  } catch {
+  } catch (e) {
+    console.error('Lỗi đọc file tokens.json:', e);
     return NextResponse.json([], { status: 200 });
   }
 } 
