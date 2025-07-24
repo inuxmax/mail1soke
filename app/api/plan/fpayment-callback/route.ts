@@ -53,7 +53,10 @@ export async function GET(req: NextRequest) {
         try {
           updateResult = await prisma.user.update({
             where: { id: userId },
-            data: { team: "pro" },
+            data: {
+              team: "premium",
+              planExpiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // +30 ngày
+            },
           });
           debugLog.updateResult = updateResult;
         } catch (e) {

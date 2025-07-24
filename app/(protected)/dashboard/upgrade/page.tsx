@@ -10,7 +10,7 @@ interface Plan {
 }
 
 const PLAN_PRICES: Record<string, number> = {
-  premium: 1,
+  premium: 5,
   business: 30,
   free: 0,
 };
