@@ -1,3 +1,6 @@
+-- DropEnum
+DROP TYPE IF EXISTS "UserRole";
+
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM
 ('ADMIN', 'USER');
