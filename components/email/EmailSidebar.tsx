@@ -112,7 +112,7 @@ export default function EmailSidebar({
   }, [showEmailModal]);
   useEffect(() => {
     if (showEmailModal && modalDomain === "gmail.com" && gmailTokenEmail) {
-      setGmailAlias(generateAliasFromEmail(gmailTokenEmail));
+      setGmailAlias(generateAliasFromEmail(gmailTokenEmail, 5));
     } else {
       setGmailAlias("");
     }
@@ -786,7 +786,7 @@ export default function EmailSidebar({
                     disabled={isEdit}
                     onClick={() => {
                       if (modalDomain === "gmail.com" && gmailTokenEmail) {
-                        setGmailAlias(generateAliasFromEmail(gmailTokenEmail));
+                        setGmailAlias(generateAliasFromEmail(gmailTokenEmail, 5));
                       } else {
                         (
                           document.getElementById(
@@ -875,17 +875,22 @@ export default function EmailSidebar({
   );
 }
 
-function generateAliasFromEmail(email: string) {
+function generateAliasFromEmail(email: string, dotCount = 5) {
   const [user, domain] = email.split("@");
   if (!user || !domain) return email;
   let alias = user;
   const positions: number[] = [];
-  while (positions.length < 2) {
+  // Số dấu chấm tối đa không vượt quá độ dài username - 1
+  const maxDots = Math.min(dotCount, alias.length - 1);
+  while (positions.length < maxDots) {
     const pos = Math.floor(Math.random() * (alias.length - 1)) + 1;
     if (!positions.includes(pos)) positions.push(pos);
   }
   positions.sort((a, b) => a - b);
-  alias = alias.slice(0, positions[0]) + "." + alias.slice(positions[0]);
-  alias = alias.slice(0, positions[1] + 1) + "." + alias.slice(positions[1] + 1);
+  let offset = 0;
+  for (const p of positions) {
+    alias = alias.slice(0, p + offset) + "." + alias.slice(p + offset);
+    offset++;
+  }
   return alias + "@" + domain;
 }

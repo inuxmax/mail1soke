@@ -217,13 +217,15 @@ export default function EmailDetail({
       </div>
 
       <div className="scrollbar-hidden flex h-full flex-col justify-between overflow-y-auto">
-        {/* <div
-          className=""
-          dangerouslySetInnerHTML={{
-            __html: processContent(email.html || email.text || ""),
-          }}
-        /> */}
-        <EmailViewer email={processContent(email.html || email.text || "")} />
+        {/* Render nội dung email: ưu tiên HTML, fallback text */}
+        {email.html ? (
+          <div
+            className="email-content p-4"
+            dangerouslySetInnerHTML={{ __html: processContent(email.html) }}
+          />
+        ) : (
+          <pre className="email-content p-4 whitespace-pre-wrap">{processContent(email.text || "")}</pre>
+        )}
 
         {attachments.length > 0 && (
           <div className="mt-auto border-t border-dashed px-2 py-3">
