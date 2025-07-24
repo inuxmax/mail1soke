@@ -1,7 +1,7 @@
 services:
   app:
-    image: ghcr.io/oiov/Mail1s.net/wrdo:${TAG:-main}
-    container_name: wrdo
+    image: ghcr.io/inuxmax/mail1soke/max:${TAG:-main}
+    container_name: max
     ports:
       - "3000:3000"
     environment:
