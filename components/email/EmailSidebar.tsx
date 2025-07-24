@@ -442,6 +442,39 @@ export default function EmailSidebar({
             <span className="text-xs">{t("Create New Email")}</span>
           )}
         </Button>
+        {/* Nút tạo Gmail tạm */}
+        <Button
+          className={isCollapsed ? "mx-auto mt-2 size-9 lg:size-8" : "flex h-8 w-full items-center justify-center gap-2 mt-2"}
+          variant="outline"
+          size="icon"
+          onClick={async () => {
+            // Lấy random email @gmail.com đã kết nối
+            const res = await fetch("/api/tokens");
+            const data = await res.json();
+            const gmailEmails = Array.isArray(data) ? data.filter((t: any) => t.email.endsWith("@gmail.com")) : [];
+            if (gmailEmails.length === 0) {
+              toast.error("Bạn chưa kết nối tài khoản Gmail nào!");
+              return;
+            }
+            const randomIdx = Math.floor(Math.random() * gmailEmails.length);
+            const randomGmail = gmailEmails[randomIdx].email;
+            const alias = generateAliasFromEmail(randomGmail, 5);
+            // Gọi API tạo email
+            const createRes = await fetch("/api/email", {
+              method: "POST",
+              body: JSON.stringify({ emailAddress: alias }),
+            });
+            if (createRes.ok) {
+              mutate();
+              toast.success("Đã tạo Temp-Gamil: " + alias);
+            } else {
+              toast.error("Tạo Temp-Gamil thất bại!");
+            }
+          }}
+        >
+          <Sparkles className="size-4" />
+          {!isCollapsed && <span className="text-xs">Tạo Temp-Gamil</span>}
+        </Button>
 
         {!isCollapsed && (
           <div className="mt-4 grid grid-cols-2 gap-2 rounded-lg text-xs text-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
