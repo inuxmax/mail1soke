@@ -20,19 +20,19 @@
 ALTER TABLE "forward_emails" DROP CONSTRAINT "forward_emails_to_fkey";
 
 -- DropIndex
-DROP INDEX IF EXISTS "user_records_created_on_idx";
+DROP INDEX "user_records_created_on_idx";
 
 -- DropIndex
-DROP INDEX IF EXISTS "user_records_userId_idx";
+DROP INDEX "user_records_userId_idx";
 
 -- DropIndex
-DROP INDEX IF EXISTS "user_send_emails_userId_idx";
+DROP INDEX "user_send_emails_userId_idx";
 
 -- DropIndex
-DROP INDEX IF EXISTS "user_urls_createdAt_idx";
+DROP INDEX "user_urls_createdAt_idx";
 
 -- DropIndex
-DROP INDEX IF EXISTS "user_urls_userId_idx";
+DROP INDEX "user_urls_userId_idx";
 
 -- AlterTable
 ALTER TABLE "domains" DROP CONSTRAINT "domains_pkey",
@@ -98,7 +98,6 @@ ADD CONSTRAINT "user_send_emails_pkey" PRIMARY KEY ("id");
 ALTER TABLE "users" ALTER COLUMN "team" DROP NOT NULL;
 
 -- CreateIndex
-DROP INDEX IF EXISTS "system_configs_key_key";
 CREATE UNIQUE INDEX "system_configs_key_key" ON "system_configs"("key");
 
 -- CreateIndex

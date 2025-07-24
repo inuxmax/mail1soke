@@ -4,17 +4,8 @@ import { prisma } from "@/lib/db";
 
 import { hashPassword, verifyPassword } from "../utils";
 
-export type UpdateUserForm = {
-  name?: string | null;
-  email?: string | null;
-  role?: any;
-  active?: any;
-  team?: string | null;
-  image?: string | null;
-  apiKey?: string | null;
-  password?: string | null;
-  planExpiredAt?: Date | null;
-};
+export interface UpdateUserForm
+  extends Omit<User, "id" | "createdAt" | "updatedAt" | "emailVerified"> {}
 
 export const getUserByEmail = async (email: string) => {
   try {
