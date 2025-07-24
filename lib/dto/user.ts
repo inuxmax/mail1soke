@@ -4,8 +4,17 @@ import { prisma } from "@/lib/db";
 
 import { hashPassword, verifyPassword } from "../utils";
 
-export interface UpdateUserForm
-  extends Omit<User, "id" | "createdAt" | "updatedAt" | "emailVerified"> {}
+export type UpdateUserForm = {
+  name?: string | null;
+  email?: string | null;
+  role?: any;
+  active?: any;
+  team?: string | null;
+  image?: string | null;
+  apiKey?: string | null;
+  password?: string | null;
+  planExpiredAt?: Date | null;
+};
 
 export const getUserByEmail = async (email: string) => {
   try {
@@ -147,6 +156,7 @@ export const updateUser = async (userId: string, data: UpdateUserForm) => {
     if (data.team !== undefined) updateData.team = data.team;
     if (data.image !== undefined) updateData.image = data.image;
     if (data.apiKey !== undefined) updateData.apiKey = data.apiKey;
+    if (data.planExpiredAt !== undefined) updateData.planExpiredAt = data.planExpiredAt;
 
     // 4. 处理密码更新
     if (data.password) {
