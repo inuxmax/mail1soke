@@ -34,7 +34,15 @@ export const footerLinks: SidebarNavItem[] = [
       { title: "Feedback", href: siteConfig.links.feedback },
     ],
   },
-
+  {
+    title: "Products",
+    items: [
+      { title: "Vmail", href: "https://Mail1s.net" },
+      { title: "Moise", href: "https://Mail1s.net" },
+      { title: "Iconce", href: "https://Mail1s.net" },
+      { title: "OiChat", href: siteConfig.links.oichat },
+    ],
+  },
   {
     title: "Docs",
     items: [

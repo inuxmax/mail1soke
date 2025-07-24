@@ -20,17 +20,3 @@ export const DELETE = auth(async (req) => {
 
   return new Response("User deleted successfully!", { status: 200 });
 });
-
-export async function GET() {
-  // Lấy user hiện tại từ session
-  const session = await auth();
-  if (!session?.user) {
-    return Response.json({}, { status: 401 });
-  }
-  // Trả về id, email, name
-  return Response.json({
-    id: session.user.id,
-    email: session.user.email,
-    name: session.user.name,
-  });
-}

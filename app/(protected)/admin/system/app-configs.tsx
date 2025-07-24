@@ -11,7 +11,7 @@ import { siteConfig } from "@/config/site";
 import { fetcher } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
@@ -23,8 +23,6 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Icons } from "@/components/shared/icons";
 import VersionNotifier from "@/components/shared/version-notifier";
-import { Modal } from "@/components/ui/modal";
-import { PenLine, Trash2 } from "lucide-react";
 
 export default function AppConfigs({}: {}) {
   const [isPending, startTransition] = useTransition();
@@ -42,63 +40,6 @@ export default function AppConfigs({}: {}) {
   const [tgChatId, setTgChatId] = useState("");
   const [tgTemplate, setTgTemplate] = useState("");
   const [tgWhiteList, setTgWhiteList] = useState("");
-
-  // State cho giá plan
-  const [planPrices, setPlanPrices] = useState<{ [key: string]: number }>({});
-  const [merchantId, setMerchantId] = useState("");
-  const [apiKey, setApiKey] = useState("");
-
-  // State cho quản lý Gmail
-  const [gmailList, setGmailList] = useState<any[]>([]);
-  const [loadingGmail, setLoadingGmail] = useState(false);
-  const [editGmail, setEditGmail] = useState<any | null>(null);
-  const [editAccessToken, setEditAccessToken] = useState("");
-  const [editRefreshToken, setEditRefreshToken] = useState("");
-  const [showEditModal, setShowEditModal] = useState(false);
-
-  const fetchGmailList = async () => {
-    setLoadingGmail(true);
-    const res = await fetch("/api/admin/gmail-tokens");
-    const data = await res.json();
-    setGmailList(data);
-    setLoadingGmail(false);
-  };
-
-  useEffect(() => {
-    fetchGmailList();
-  }, []);
-
-  const handleDeleteGmail = async (email: string) => {
-    if (!window.confirm(`Xóa Gmail ${email}?`)) return;
-    await fetch("/api/admin/gmail-tokens", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    fetchGmailList();
-  };
-
-  const handleEditGmail = (gmail: any) => {
-    setEditGmail(gmail);
-    setEditAccessToken(gmail.accessToken || "");
-    setEditRefreshToken(gmail.refreshToken || "");
-    setShowEditModal(true);
-  };
-
-  const handleSaveEditGmail = async () => {
-    if (!editGmail) return;
-    await fetch("/api/admin/gmail-tokens", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: editGmail.email,
-        accessToken: editAccessToken,
-        refreshToken: editRefreshToken,
-      }),
-    });
-    setShowEditModal(false);
-    fetchGmailList();
-  };
 
   const t = useTranslations("Setting");
 
@@ -122,22 +63,6 @@ export default function AppConfigs({}: {}) {
       if (configs?.enable_email_password_login) count++;
       setLoginMethodCount(count);
     }
-
-    // Fetch giá plan từ API
-    fetch("/api/plan?all=1").then(res => res.json()).then(data => {
-      if (data && data.list) {
-        const prices: { [key: string]: number } = {};
-        data.list.forEach((p: any) => {
-          prices[p.name] = p.price || 0;
-        });
-        setPlanPrices(prices);
-      }
-    });
-    // Fetch merchantId, apiKey từ API hoặc system config nếu có
-    fetch("/api/admin/configs").then(res => res.json()).then(data => {
-      if (data && data.FPAY_MERCHANT_ID) setMerchantId(data.FPAY_MERCHANT_ID);
-      if (data && data.FPAY_API_KEY) setApiKey(data.FPAY_API_KEY);
-    });
   }, [configs, isLoading]);
 
   const handleChange = (value: any, key: string, type: string) => {
@@ -155,26 +80,6 @@ export default function AppConfigs({}: {}) {
         });
       }
     });
-  };
-
-  const handlePriceChange = (plan: string, value: string) => {
-    setPlanPrices(prev => ({ ...prev, [plan]: Number(value) }));
-  };
-
-  const handleSave = async () => {
-    // Lưu giá plan
-    await fetch("/api/admin/plan-prices", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(planPrices),
-    });
-    // Lưu merchantId, apiKey
-    await fetch("/api/admin/configs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ FPAY_MERCHANT_ID: merchantId, FPAY_API_KEY: apiKey }),
-    });
-    alert("Đã lưu cấu hình!");
   };
 
   if (isLoading) {
@@ -790,119 +695,6 @@ export default function AppConfigs({}: {}) {
           </div>
         </CollapsibleContent>
       </Collapsible>
-
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Cấu hình thanh toán & Giá gói</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block font-semibold mb-1">MERCHANT_ID (FPAY)</label>
-              <input type="text" className="w-full border rounded p-2" value={merchantId} onChange={e => setMerchantId(e.target.value)} />
-            </div>
-            <div>
-              <label className="block font-semibold mb-1">API_KEY (FPAY)</label>
-              <input type="text" className="w-full border rounded p-2" value={apiKey} onChange={e => setApiKey(e.target.value)} />
-            </div>
-          </div>
-          <div className="mt-6">
-            <label className="block font-semibold mb-2">Giá từng gói (USDT)</label>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {Object.keys(planPrices).map(plan => (
-                <div key={plan} className="flex flex-col items-start">
-                  <span className="capitalize font-medium mb-1">{plan}</span>
-                  <input
-                    type="number"
-                    className="border rounded p-2 w-32"
-                    value={planPrices[plan]}
-                    onChange={e => handlePriceChange(plan, e.target.value)}
-                    min={0}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <button onClick={handleSave} className="mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Lưu cấu hình</button>
-        </CardContent>
-      </Card>
-
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Quản lý Gmail đã thêm</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {loadingGmail ? (
-            <div>Đang tải...</div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full border text-sm">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="p-2 border">Email</th>
-                    <th className="p-2 border">Trạng thái</th>
-                    <th className="p-2 border">Thời gian</th>
-                    <th className="p-2 border">Thao tác</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {gmailList.length === 0 ? (
-                    <tr><td colSpan={4} className="text-center p-2">Chưa có Gmail nào</td></tr>
-                  ) : gmailList.map(gmail => (
-                    <tr key={gmail.id}>
-                      <td className="p-2 border">{gmail.email}</td>
-                      <td className="p-2 border">{gmail.status}</td>
-                      <td className="p-2 border">{gmail.time ? new Date(gmail.time).toLocaleString() : ""}</td>
-                      <td className="p-2 border flex gap-2">
-                        <Button
-                          className="h-7 px-1 text-xs hover:bg-slate-100 dark:hover:text-primary-foreground sm:px-1.5"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleEditGmail(gmail)}
-                        >
-                          <span className="hidden sm:block">Edit</span>
-                          <PenLine className="mx-0.5 size-4 sm:ml-1 sm:size-3" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="hover:bg-red-100 hover:text-red-600"
-                          onClick={() => handleDeleteGmail(gmail.email)}
-                          title="Xóa Gmail"
-                        >
-                          <Trash2 className="size-5" />
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-          <button onClick={fetchGmailList} className="mt-4 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">Làm mới</button>
-        </CardContent>
-      </Card>
-      <Modal showModal={showEditModal} setShowModal={setShowEditModal} className="max-w-lg">
-        <div className="p-4">
-          <h2 className="text-lg font-bold mb-4">Chỉnh sửa Gmail</h2>
-          <div className="mb-3">
-            <label className="block font-semibold mb-1">Email</label>
-            <input type="text" className="w-full border rounded p-2" value={editGmail?.email || ""} readOnly />
-          </div>
-          <div className="mb-3">
-            <label className="block font-semibold mb-1">Access Token</label>
-            <textarea className="w-full border rounded p-2" rows={3} value={editAccessToken} onChange={e => setEditAccessToken(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label className="block font-semibold mb-1">Refresh Token</label>
-            <textarea className="w-full border rounded p-2" rows={2} value={editRefreshToken} onChange={e => setEditRefreshToken(e.target.value)} />
-          </div>
-          <div className="flex gap-2 justify-end">
-            <button onClick={() => setShowEditModal(false)} className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">Hủy</button>
-            <button onClick={handleSaveEditGmail} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Lưu</button>
-          </div>
-        </div>
-      </Modal>
     </Card>
   );
 }

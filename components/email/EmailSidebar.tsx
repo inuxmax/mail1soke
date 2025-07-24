@@ -95,15 +95,9 @@ export default function EmailSidebar({
     fetch("/api/tokens")
       .then(res => res.json())
       .then(data => {
-        if (Array.isArray(data)) {
-          // Lọc chỉ lấy email @gmail.com
-          const gmailEmails = data.filter((t: any) => t.email.endsWith("@gmail.com"));
-          if (gmailEmails.length > 0) {
-            const randomIdx = Math.floor(Math.random() * gmailEmails.length);
-            setGmailTokenEmail(gmailEmails[randomIdx].email);
-          } else {
-            setGmailTokenEmail("");
-          }
+        if (Array.isArray(data) && data.length > 0) {
+          const randomIdx = Math.floor(Math.random() * data.length);
+          setGmailTokenEmail(data[randomIdx].email);
         } else {
           setGmailTokenEmail("");
         }
@@ -112,7 +106,7 @@ export default function EmailSidebar({
   }, [showEmailModal]);
   useEffect(() => {
     if (showEmailModal && modalDomain === "gmail.com" && gmailTokenEmail) {
-      setGmailAlias(generateAliasFromEmail(gmailTokenEmail, 5));
+      setGmailAlias(generateAliasFromEmail(gmailTokenEmail));
     } else {
       setGmailAlias("");
     }
@@ -186,15 +180,15 @@ export default function EmailSidebar({
   // Gọi hook useTotalGmailInboxCount ở đầu hàm, không gọi trong JSX
   const totalGmailInboxCount = useTotalGmailInboxCount(userEmails);
 
-  const handleSubmitEmail = async (emailAddress: string) => {
+  const handleSubmitEmail = async (emailSuffix: string) => {
     const limit_len =
       emailDomains?.find((d) => d.domain_name === domainSuffix)
         ?.min_email_length ?? 1;
-    if (!emailAddress || emailAddress.split("@")[0].length < limit_len) {
+    if (!emailSuffix || emailSuffix.length < limit_len) {
       toast.error(`Email address characters must be at least ${limit_len}`);
       return;
     }
-    if (/[^a-zA-Z0-9_\-\.]/.test(emailAddress.split("@")[0])) {
+    if (/[^a-zA-Z0-9_\-\.]/.test(emailSuffix)) {
       toast.error("Invalid email address");
       return;
     }
@@ -202,7 +196,7 @@ export default function EmailSidebar({
       toast.error("Domain suffix cannot be empty");
       return;
     }
-    if (reservedAddressSuffix.includes(emailAddress.split("@")[0])) {
+    if (reservedAddressSuffix.includes(emailSuffix)) {
       toast.error("Email address is reserved, please choose another one");
       return;
     }
@@ -214,7 +208,9 @@ export default function EmailSidebar({
         )?.id;
         const res = await fetch(`/api/email/${editEmailId}`, {
           method: "PUT",
-          body: JSON.stringify({ emailAddress }),
+          body: JSON.stringify({
+            emailAddress: `${emailSuffix}@${domainSuffix}`,
+          }),
         });
         if (res.ok) {
           mutate();
@@ -230,7 +226,9 @@ export default function EmailSidebar({
         try {
           const res = await fetch("/api/email", {
             method: "POST",
-            body: JSON.stringify({ emailAddress }),
+            body: JSON.stringify({
+              emailAddress: `${emailSuffix}@${domainSuffix}`,
+            }),
           });
           if (res.ok) {
             mutate();
@@ -441,39 +439,6 @@ export default function EmailSidebar({
           {!isCollapsed && (
             <span className="text-xs">{t("Create New Email")}</span>
           )}
-        </Button>
-        {/* Nút tạo Gmail tạm */}
-        <Button
-          className={isCollapsed ? "mx-auto mt-2 size-9 lg:size-8" : "flex h-8 w-full items-center justify-center gap-2 mt-2"}
-          variant="outline"
-          size="icon"
-          onClick={async () => {
-            // Lấy random email @gmail.com đã kết nối
-            const res = await fetch("/api/tokens");
-            const data = await res.json();
-            const gmailEmails = Array.isArray(data) ? data.filter((t: any) => t.email.endsWith("@gmail.com")) : [];
-            if (gmailEmails.length === 0) {
-              toast.error("Bạn chưa kết nối tài khoản Gmail nào!");
-              return;
-            }
-            const randomIdx = Math.floor(Math.random() * gmailEmails.length);
-            const randomGmail = gmailEmails[randomIdx].email;
-            const alias = generateAliasFromEmail(randomGmail, 5);
-            // Gọi API tạo email
-            const createRes = await fetch("/api/email", {
-              method: "POST",
-              body: JSON.stringify({ emailAddress: alias }),
-            });
-            if (createRes.ok) {
-              mutate();
-              toast.success("Đã tạo Temp-Gamil: " + alias);
-            } else {
-              toast.error("Tạo Temp-Gamil thất bại!");
-            }
-          }}
-        >
-          <Sparkles className="size-4" />
-          {!isCollapsed && <span className="text-xs">Tạo Temp-Gamil</span>}
         </Button>
 
         {!isCollapsed && (
@@ -760,12 +725,11 @@ export default function EmailSidebar({
                 e.preventDefault();
                 let emailAddress = "";
                 if (modalDomain === "gmail.com" && gmailAlias) {
-                  // Luôn ép domain là gmail.com
-                  emailAddress = gmailAlias.split("@")[0] + "@gmail.com";
+                  emailAddress = gmailAlias;
                 } else {
                   emailAddress = (e.target as any).emailAddress.value + "@" + modalDomain;
                 }
-                handleSubmitEmail(emailAddress); // Truyền nguyên email đầy đủ
+                handleSubmitEmail(emailAddress.split("@")[0]);
               }}
             >
               <div className="mb-4">
@@ -819,7 +783,7 @@ export default function EmailSidebar({
                     disabled={isEdit}
                     onClick={() => {
                       if (modalDomain === "gmail.com" && gmailTokenEmail) {
-                        setGmailAlias(generateAliasFromEmail(gmailTokenEmail, 5));
+                        setGmailAlias(generateAliasFromEmail(gmailTokenEmail));
                       } else {
                         (
                           document.getElementById(
@@ -908,22 +872,17 @@ export default function EmailSidebar({
   );
 }
 
-function generateAliasFromEmail(email: string, dotCount = 5) {
+function generateAliasFromEmail(email: string) {
   const [user, domain] = email.split("@");
   if (!user || !domain) return email;
   let alias = user;
   const positions: number[] = [];
-  // Số dấu chấm tối đa không vượt quá độ dài username - 1
-  const maxDots = Math.min(dotCount, alias.length - 1);
-  while (positions.length < maxDots) {
+  while (positions.length < 2) {
     const pos = Math.floor(Math.random() * (alias.length - 1)) + 1;
     if (!positions.includes(pos)) positions.push(pos);
   }
   positions.sort((a, b) => a - b);
-  let offset = 0;
-  for (const p of positions) {
-    alias = alias.slice(0, p + offset) + "." + alias.slice(p + offset);
-    offset++;
-  }
+  alias = alias.slice(0, positions[0]) + "." + alias.slice(positions[0]);
+  alias = alias.slice(0, positions[1] + 1) + "." + alias.slice(positions[1] + 1);
   return alias + "@" + domain;
 }

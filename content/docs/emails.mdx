@@ -4,9 +4,7 @@ description: Create and manage your emails.
 ---
 
 <Callout type="warning" twClass="mt-0">
-  - Please do not abuse the free email service. If any illegal or malicious activities are discovered, the account will be banned. If you need help, please contact us.
-
-  - API does not support Gmail service (this feature is under development)
+  Please do not abuse the free email service. If any illegal or malicious activities are discovered, the account will be banned. If you need help, please contact us.
 </Callout>
 
 ## Overview
@@ -16,6 +14,13 @@ We provide a free email service for users to send and receive emails. Users can 
 Start using the email service at https://Mail1s.net/emails !
 
 
+## How it works
+
+We use [resend](https://resend.com/) to send emails. Resend is a free email service that allows users to send and receive emails. 
+
+For receive emails, we use the [cloudflare](https://workers.cloudflare.com/) email worker to receive emails and forword emails. 
+
+It's powerful and stable. And it's easy to use.
 
 ## Expiration
 

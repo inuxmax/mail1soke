@@ -1,6 +1,7 @@
-export const dynamic = "force-dynamic";
 import { NextResponse } from 'next/server';
-import { prisma } from "@/lib/db";
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import { writeFile } from 'fs/promises';
 
 async function isTokenValid(accessToken) {
   try {
@@ -15,9 +16,9 @@ async function isTokenValid(accessToken) {
 
 async function refreshAccessToken(refreshToken) {
   const params = new URLSearchParams({
-    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID_MULTI || "",
-    client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || "",
-    refresh_token: refreshToken || "",
+    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID_MULTI || 'YOUR_GOOGLE_CLIENT_ID_MULTI',
+    client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || 'YOUR_GOOGLE_CLIENT_SECRET',
+    refresh_token: refreshToken,
     grant_type: 'refresh_token',
   });
   const res = await fetch('https://oauth2.googleapis.com/token', {
@@ -32,25 +33,28 @@ async function refreshAccessToken(refreshToken) {
 
 export async function GET() {
   try {
-    const tokens = await prisma.gmailToken.findMany();
-    for (let token of tokens) {
+    const tokensPath = join(process.cwd(), 'tokens.json');
+    const data = await readFile(tokensPath, 'utf8');
+    let tokens = JSON.parse(data);
+    let updated = false;
+    for (let i = 0; i < tokens.length; i++) {
+      const token = tokens[i];
       if (token.accessToken && !(await isTokenValid(token.accessToken))) {
         if (token.refreshToken) {
           const newAccessToken = await refreshAccessToken(token.refreshToken);
           if (newAccessToken) {
-            await prisma.gmailToken.update({
-              where: { email: token.email },
-              data: { accessToken: newAccessToken, time: new Date() }
-            });
+            tokens[i].accessToken = newAccessToken;
+            tokens[i].time = new Date().toISOString();
+            updated = true;
           }
         }
       }
     }
-    // Lấy lại danh sách mới nhất sau khi cập nhật
-    const freshTokens = await prisma.gmailToken.findMany();
-    return NextResponse.json(freshTokens);
-  } catch (e) {
-    console.error('Lỗi đọc DB GmailToken:', e);
+    if (updated) {
+      await writeFile(tokensPath, JSON.stringify(tokens, null, 2), 'utf8');
+    }
+    return NextResponse.json(tokens);
+  } catch {
     return NextResponse.json([], { status: 200 });
   }
 } 

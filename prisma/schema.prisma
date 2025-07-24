@@ -57,7 +57,6 @@ model User {
   image         String?
   active        Int       @default(1) // 0 封禁，1 正常
   team          String?   @default("free")
-  planExpiredAt DateTime? // ngày hết hạn gói pro
   apiKey        String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
@@ -297,7 +296,6 @@ model SystemConfig {
 model Plan {
   id   String @id @default(uuid())
   name String @unique // "free", "premium", "business"
-  price Float? // Giá gói (USDT)
 
   // Short Link (SL) related quotas
   slTrackedClicks      Int
@@ -360,13 +358,4 @@ model UserFile {
 
   @@index([userId, providerName, status, lastModified, createdAt])
   @@map(name: "user_files")
-}
-
-model GmailToken {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  accessToken  String
-  refreshToken String?
-  time         DateTime @default(now())
-  status       String   @default("active")
 }
