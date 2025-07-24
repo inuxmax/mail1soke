@@ -125,6 +125,10 @@ export default function ChatRoom() {
 
     try {
       const peer = new Peer({
+        host: "9000-peers-peerjsserver-f2mbkya7nv0.ws-us120.gitpod.io",
+        port: 443,
+        path: "/peerjs",
+        secure: true,
         config: {
           iceServers: [
             { urls: "stun:stun.l.google.com:19302" },
