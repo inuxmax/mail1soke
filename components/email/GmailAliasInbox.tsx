@@ -68,7 +68,7 @@ export default function GmailAliasInbox({ alias }: Props) {
                 str = str.replace(/-/g, "+").replace(/_/g, "/");
                 while (str.length % 4) str += "=";
                 const binary = atob(str);
-                const bytes = new Uint8Array([...binary].map(char => char.charCodeAt(0)));
+                const bytes = new Uint8Array(Array.from(binary, char => char.charCodeAt(0)));
                 return new TextDecoder("utf-8").decode(bytes);
               }
               // Lấy body (text hoặc html)
