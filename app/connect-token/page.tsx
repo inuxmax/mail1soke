@@ -27,12 +27,8 @@ function ConnectTokenPageContent() {
 
   // Lấy danh sách email đã lưu
   useEffect(() => {
-    fetch('/api/tokens')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) setSavedEmails(data.map((t: any) => t.email));
-      });
-  }, [status, typeof window !== 'undefined' && window.location.pathname === '/connect-token']);
+    reloadEmails();
+  }, []);
 
   const handleSaveToken = async () => {
     setStatus("");
@@ -53,8 +49,11 @@ function ConnectTokenPageContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ accessToken, email }),
       });
+      const result = await res.json();
+      console.log('Kết quả lưu token:', result);
       if (res.ok) {
         setStatus("Đã lưu accessToken vào file json thành công!");
+        reloadEmails(); // Gọi lại reloadEmails để cập nhật giao diện ngay
       } else {
         setError("Lỗi khi lưu accessToken!");
       }
@@ -120,7 +119,17 @@ function ConnectTokenPageContent() {
     window.open(url, '_blank', 'width=500,height=600');
   }
 
-  // Thêm hàm xoá tài khoản
+  // Thêm hàm reloadEmails để luôn lấy danh sách mới nhất từ API
+  const reloadEmails = () => {
+    fetch('/api/tokens')
+      .then(res => res.json())
+      .then(data => {
+        console.log('Dữ liệu từ API /api/tokens:', data);
+        if (Array.isArray(data)) setSavedEmails(data.map((t: any) => t.email));
+      });
+  };
+
+  // Thêm hàm xoá tài khoản, sau khi xoá xong sẽ reload lại danh sách
   async function handleDeleteEmail(email: string, setStatus: any, setError: any, reload: () => void) {
     try {
       const res = await fetch("/api/delete-token", {
@@ -130,7 +139,7 @@ function ConnectTokenPageContent() {
       });
       if (res.ok) {
         setStatus("Đã xoá tài khoản thành công!");
-        reload();
+        reload(); // Gọi lại reloadEmails để cập nhật giao diện
       } else {
         setError("Lỗi khi xoá tài khoản!");
       }
@@ -138,14 +147,6 @@ function ConnectTokenPageContent() {
       setError("Lỗi khi gọi API xoá tài khoản!");
     }
   }
-
-  const reloadEmails = () => {
-    fetch('/api/tokens')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) setSavedEmails(data.map((t: any) => t.email));
-      });
-  };
 
   function useTokenStatus(emailList: string[]) {
     const [statusMap, setStatusMap] = useState<Record<string, 'valid' | 'invalid' | 'checking'>>({});

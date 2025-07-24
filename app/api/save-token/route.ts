@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { writeFile, readFile } from "fs/promises";
 import { join, resolve } from "path";
+import { prisma } from "@/lib/db";
 
 const TOKENS_PATH = resolve(process.cwd(), "tokens.json");
 
@@ -37,6 +38,16 @@ export async function POST(req: NextRequest) {
         time: new Date().toISOString(),
         status: "active"
       });
+    }
+    // Lưu vào database GmailToken
+    try {
+      await prisma.gmailToken.upsert({
+        where: { email },
+        update: { accessToken, refreshToken, time: new Date(), status: "active" },
+        create: { email, accessToken, refreshToken, time: new Date(), status: "active" }
+      });
+    } catch (err) {
+      console.error("Lỗi ghi DB GmailToken:", err);
     }
     try {
       await writeFile(TOKENS_PATH, JSON.stringify(tokens, null, 2), "utf8");
