@@ -129,6 +129,7 @@ export default function ChatRoom() {
         port: 443,
         path: "/peerjs",
         secure: true,
+        key: "peerjs",
         config: {
           iceServers: [
             { urls: "stun:stun.l.google.com:19302" },
