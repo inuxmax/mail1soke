@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import { readFile } from 'fs/promises';
-import { join } from 'path';
-import { writeFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
+import { join, resolve } from 'path';
 
 async function isTokenValid(accessToken) {
   try {
@@ -33,7 +32,7 @@ async function refreshAccessToken(refreshToken) {
 
 export async function GET() {
   try {
-    const tokensPath = join(process.cwd(), 'tokens.json');
+    const tokensPath = resolve(process.cwd(), 'tokens.json');
     const data = await readFile(tokensPath, 'utf8');
     let tokens = JSON.parse(data);
     let updated = false;
@@ -51,7 +50,11 @@ export async function GET() {
       }
     }
     if (updated) {
-      await writeFile(tokensPath, JSON.stringify(tokens, null, 2), 'utf8');
+      try {
+        await writeFile(tokensPath, JSON.stringify(tokens, null, 2), 'utf8');
+      } catch (err) {
+        console.error('Lỗi ghi file tokens.json:', err);
+      }
     }
     return NextResponse.json(tokens);
   } catch {
