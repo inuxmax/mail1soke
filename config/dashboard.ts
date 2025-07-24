@@ -17,6 +17,11 @@ export const sidebarLinks: SidebarNavItem[] = [
         icon: "storage",
         title: "Cloud Storage",
       },
+      {
+        href: "/chat",
+        icon: "messages",
+        title: "Chat Room",
+      },
     ],
   },
   {
