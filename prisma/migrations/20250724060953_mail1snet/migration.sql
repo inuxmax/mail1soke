@@ -98,6 +98,7 @@ ADD CONSTRAINT "user_send_emails_pkey" PRIMARY KEY ("id");
 ALTER TABLE "users" ALTER COLUMN "team" DROP NOT NULL;
 
 -- CreateIndex
+DROP INDEX IF EXISTS "system_configs_key_key";
 CREATE UNIQUE INDEX "system_configs_key_key" ON "system_configs"("key");
 
 -- CreateIndex
