@@ -297,6 +297,7 @@ model SystemConfig {
 model Plan {
   id   String @id @default(uuid())
   name String @unique // "free", "premium", "business"
+  price Float? // Giá gói (USDT)
 
   // Short Link (SL) related quotas
   slTrackedClicks      Int

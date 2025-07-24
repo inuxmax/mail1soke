@@ -1,11 +1,8 @@
-import { NextRequest } from "next/server";
-
-import {
-  getMultipleConfigs,
-  updateSystemConfig,
-} from "@/lib/dto/system-config";
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/db";
 import { checkUserStatus } from "@/lib/dto/user";
 import { getCurrentUser } from "@/lib/session";
+import { getMultipleConfigs } from "@/lib/dto/system-config";
 
 export async function GET(req: NextRequest) {
   try {
@@ -34,6 +31,9 @@ export async function GET(req: NextRequest) {
       "enable_email_registration_suffix_limit",
       "email_registration_suffix_limit_white_list",
       "enable_subdomain_status_email_pusher",
+      // Thêm các key động nếu cần
+      "FPAY_MERCHANT_ID",
+      "FPAY_API_KEY",
     ]);
 
     return Response.json(configs, { status: 200 });
@@ -45,26 +45,17 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = checkUserStatus(await getCurrentUser());
-    if (user instanceof Response) return user;
-    if (user.role !== "ADMIN") {
-      return Response.json("Unauthorized", { status: 401 });
+    const body = await req.json();
+    // Lưu tất cả key động vào system_configs
+    for (const key in body) {
+      await prisma.systemConfig.upsert({
+        where: { key },
+        update: { value: body[key], updatedAt: new Date() },
+        create: { key, value: body[key], type: "STRING" },
+      });
     }
-
-    const { key, value, type } = await req.json();
-    if (!key || !type) {
-      return Response.json("key and value is required", { status: 400 });
-    }
-
-    const configs = await getMultipleConfigs([key]);
-
-    if (key in configs) {
-      await updateSystemConfig(key, { value, type });
-      return Response.json("Success", { status: 200 });
-    }
-    return Response.json("Invalid key", { status: 400 });
-  } catch (error) {
-    console.error("[Error]", error);
-    return Response.json(error.message || "Server error", { status: 500 });
+    return NextResponse.json({ status: "success" });
+  } catch (e) {
+    return NextResponse.json({ status: "error", msg: "Lỗi lưu configs!" }, { status: 500 });
   }
 }

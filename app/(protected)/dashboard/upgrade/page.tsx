@@ -9,12 +9,6 @@ interface Plan {
   description?: string;
 }
 
-const PLAN_PRICES: Record<string, number> = {
-  premium: 5,
-  business: 30,
-  free: 0,
-};
-
 export default function UpgradePlanPage() {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
@@ -30,7 +24,7 @@ export default function UpgradePlanPage() {
         if (data && data.list) {
           const plansWithPrice = data.list.map((p: any) => ({
             ...p,
-            price: PLAN_PRICES[p.name] || 0,
+            price: p.price || 0,
             description: p.description || `Gói ${p.name}`,
           }));
           setPlans(plansWithPrice);

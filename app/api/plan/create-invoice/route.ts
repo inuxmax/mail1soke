@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/db";
 
-// Bảo mật: Lưu merchant_id và api_key ở biến môi trường
-const MERCHANT_ID = process.env.FPAY_MERCHANT_ID || "68824e41092da";
-const API_KEY = process.env.FPAY_API_KEY || "74ee736b70b6cb022fc8091720fa29b568824e41092e8";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+async function getConfig(key: string) {
+  const config = await prisma.systemConfig.findUnique({ where: { key } });
+  return config?.value || "";
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,13 +14,17 @@ export async function POST(req: NextRequest) {
     if (!name || !description || !amount || !userId) {
       return NextResponse.json({ status: "error", msg: "Thiếu thông tin." }, { status: 400 });
     }
-    // request_id chứa userId để callback xác định user
+    // Lấy merchant_id, api_key từ DB
+    const MERCHANT_ID = await getConfig("FPAY_MERCHANT_ID");
+    const API_KEY = await getConfig("FPAY_API_KEY");
+    if (!MERCHANT_ID || !API_KEY) {
+      return NextResponse.json({ status: "error", msg: "Chưa cấu hình MERCHANT_ID hoặc API_KEY!" }, { status: 400 });
+    }
     const request_id = `user_${userId}_${Date.now()}_${Math.floor(Math.random()*10000)}`;
     const callback_url = `${APP_URL}/api/plan/fpayment-callback`;
     const success_url = `${APP_URL}/dashboard/upgrade/success`;
     const cancel_url = `${APP_URL}/upgrade/cancel`;
 
-    // Gọi API fpayment
     const formData = new URLSearchParams();
     formData.append("merchant_id", MERCHANT_ID);
     formData.append("api_key", API_KEY);
@@ -35,7 +42,6 @@ export async function POST(req: NextRequest) {
     });
     const data = await res.json();
     if (data.status === "success") {
-      // TODO: Lưu thông tin hóa đơn vào DB nếu cần
       return NextResponse.json(data);
     } else {
       return NextResponse.json({ status: "error", msg: data.msg || "Tạo hóa đơn thất bại!" }, { status: 400 });
