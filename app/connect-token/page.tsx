@@ -3,9 +3,9 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 import { useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { prisma } from "@/lib/db";
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID";
 const GOOGLE_REDIRECT_URI = typeof window !== 'undefined' ? `${window.location.origin}/google-callback` : '';
@@ -130,7 +130,7 @@ function ConnectTokenPageContent() {
       });
       if (res.ok) {
         setStatus("Đã xoá tài khoản thành công!");
-        reload(); // Gọi lại reloadEmails để cập nhật UI
+        reload();
       } else {
         setError("Lỗi khi xoá tài khoản!");
       }

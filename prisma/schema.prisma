@@ -359,12 +359,3 @@ model UserFile {
   @@index([userId, providerName, status, lastModified, createdAt])
   @@map(name: "user_files")
 }
-
-model GoogleToken {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  accessToken  String
-  refreshToken String?
-  time         DateTime @default(now())
-  status       String   @default("active")
-}

@@ -113,7 +113,7 @@ export default function EmailSidebar({
   }, [showEmailModal, modalDomain, gmailTokenEmail]);
 
   useEffect(() => {
-    fetch("/api/tokens")
+    fetch("/tokens.json")
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0 && data[0].email) {
@@ -165,14 +165,10 @@ export default function EmailSidebar({
   });
 
   useEffect(() => {
-    if (!domainSuffix) {
-      if (modalDomain === "gmail.com") {
-        setDomainSuffix("gmail.com");
-      } else if (emailDomains && emailDomains.length > 0) {
-        setDomainSuffix(emailDomains[0].domain_name);
-      }
+    if (!domainSuffix && emailDomains && emailDomains.length > 0) {
+      setDomainSuffix(emailDomains[0].domain_name);
     }
-  }, [domainSuffix, emailDomains, modalDomain]);
+  }, [domainSuffix, emailDomains]);
 
   if (!selectedEmailAddress && data && data.list.length > 0) {
     onSelectEmail(data.list[0].emailAddress);

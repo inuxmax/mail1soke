@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import { writeFile } from 'fs/promises';
 
-async function isTokenValid(accessToken: string) {
+async function isTokenValid(accessToken) {
   try {
     const res = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/profile', {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -12,7 +14,7 @@ async function isTokenValid(accessToken: string) {
   }
 }
 
-async function refreshAccessToken(refreshToken: string) {
+async function refreshAccessToken(refreshToken) {
   const params = new URLSearchParams({
     client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID_MULTI || 'YOUR_GOOGLE_CLIENT_ID_MULTI',
     client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || 'YOUR_GOOGLE_CLIENT_SECRET',
@@ -31,32 +33,25 @@ async function refreshAccessToken(refreshToken: string) {
 
 export async function GET() {
   try {
-    let tokens = await prisma.googleToken.findMany();
+    const tokensPath = join(process.cwd(), 'tokens.json');
+    const data = await readFile(tokensPath, 'utf8');
+    let tokens = JSON.parse(data);
     let updated = false;
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
-      try {
-        if (token.accessToken && !(await isTokenValid(token.accessToken))) {
-          if (token.refreshToken) {
-            const newAccessToken = await refreshAccessToken(token.refreshToken);
-            if (newAccessToken) {
-              await prisma.googleToken.update({
-                where: { email: token.email },
-                data: {
-                  accessToken: newAccessToken,
-                  time: new Date(),
-                },
-              });
-              tokens[i].accessToken = newAccessToken;
-              tokens[i].time = new Date();
-              updated = true;
-            }
+      if (token.accessToken && !(await isTokenValid(token.accessToken))) {
+        if (token.refreshToken) {
+          const newAccessToken = await refreshAccessToken(token.refreshToken);
+          if (newAccessToken) {
+            tokens[i].accessToken = newAccessToken;
+            tokens[i].time = new Date().toISOString();
+            updated = true;
           }
         }
-      } catch (e) {
-        // Nếu có lỗi khi kiểm tra token, vẫn giữ token trong danh sách
-        // Không throw, không bỏ qua bản ghi
       }
+    }
+    if (updated) {
+      await writeFile(tokensPath, JSON.stringify(tokens, null, 2), 'utf8');
     }
     return NextResponse.json(tokens);
   } catch {

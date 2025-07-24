@@ -1,18 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
+import { writeFile, readFile } from "fs/promises";
+import { join } from "path";
+
+const TOKENS_PATH = join(process.cwd(), "tokens.json");
 
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json();
-    console.log("Email nhận được để xoá:", email);
-    const token = await prisma.googleToken.findUnique({ where: { email } });
-    console.log("Token tìm được trong DB:", token);
     if (!email) {
       return NextResponse.json({ error: "Thiếu email" }, { status: 400 });
     }
-    await prisma.googleToken.delete({ where: { email } });
+    let tokens: any[] = [];
+    try {
+      const data = await readFile(TOKENS_PATH, "utf8");
+      tokens = JSON.parse(data);
+      if (!Array.isArray(tokens)) tokens = [];
+    } catch (e) {
+      tokens = [];
+    }
+    const newTokens = tokens.filter(t => t.email !== email);
+    await writeFile(TOKENS_PATH, JSON.stringify(newTokens, null, 2), "utf8");
     return NextResponse.json({ success: true });
   } catch (e) {
-    return NextResponse.json({ error: e?.message || JSON.stringify(e) || "Lỗi server" }, { status: 500 });
+    return NextResponse.json({ error: "Lỗi server" }, { status: 500 });
   }
 } 
