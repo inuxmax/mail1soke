@@ -186,15 +186,15 @@ export default function EmailSidebar({
   // Gọi hook useTotalGmailInboxCount ở đầu hàm, không gọi trong JSX
   const totalGmailInboxCount = useTotalGmailInboxCount(userEmails);
 
-  const handleSubmitEmail = async (emailSuffix: string) => {
+  const handleSubmitEmail = async (emailAddress: string) => {
     const limit_len =
       emailDomains?.find((d) => d.domain_name === domainSuffix)
         ?.min_email_length ?? 1;
-    if (!emailSuffix || emailSuffix.length < limit_len) {
+    if (!emailAddress || emailAddress.split("@")[0].length < limit_len) {
       toast.error(`Email address characters must be at least ${limit_len}`);
       return;
     }
-    if (/[^a-zA-Z0-9_\-\.]/.test(emailSuffix)) {
+    if (/[^a-zA-Z0-9_\-\.]/.test(emailAddress.split("@")[0])) {
       toast.error("Invalid email address");
       return;
     }
@@ -202,7 +202,7 @@ export default function EmailSidebar({
       toast.error("Domain suffix cannot be empty");
       return;
     }
-    if (reservedAddressSuffix.includes(emailSuffix)) {
+    if (reservedAddressSuffix.includes(emailAddress.split("@")[0])) {
       toast.error("Email address is reserved, please choose another one");
       return;
     }
@@ -214,9 +214,7 @@ export default function EmailSidebar({
         )?.id;
         const res = await fetch(`/api/email/${editEmailId}`, {
           method: "PUT",
-          body: JSON.stringify({
-            emailAddress: `${emailSuffix}@${domainSuffix}`,
-          }),
+          body: JSON.stringify({ emailAddress }),
         });
         if (res.ok) {
           mutate();
@@ -232,9 +230,7 @@ export default function EmailSidebar({
         try {
           const res = await fetch("/api/email", {
             method: "POST",
-            body: JSON.stringify({
-              emailAddress: `${emailSuffix}@${domainSuffix}`,
-            }),
+            body: JSON.stringify({ emailAddress }),
           });
           if (res.ok) {
             mutate();
@@ -731,11 +727,12 @@ export default function EmailSidebar({
                 e.preventDefault();
                 let emailAddress = "";
                 if (modalDomain === "gmail.com" && gmailAlias) {
-                  emailAddress = gmailAlias;
+                  // Luôn ép domain là gmail.com
+                  emailAddress = gmailAlias.split("@")[0] + "@gmail.com";
                 } else {
                   emailAddress = (e.target as any).emailAddress.value + "@" + modalDomain;
                 }
-                handleSubmitEmail(emailAddress.split("@")[0]);
+                handleSubmitEmail(emailAddress); // Truyền nguyên email đầy đủ
               }}
             >
               <div className="mb-4">
