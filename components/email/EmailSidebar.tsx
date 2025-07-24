@@ -95,9 +95,15 @@ export default function EmailSidebar({
     fetch("/api/tokens")
       .then(res => res.json())
       .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          const randomIdx = Math.floor(Math.random() * data.length);
-          setGmailTokenEmail(data[randomIdx].email);
+        if (Array.isArray(data)) {
+          // Lọc chỉ lấy email @gmail.com
+          const gmailEmails = data.filter((t: any) => t.email.endsWith("@gmail.com"));
+          if (gmailEmails.length > 0) {
+            const randomIdx = Math.floor(Math.random() * gmailEmails.length);
+            setGmailTokenEmail(gmailEmails[randomIdx].email);
+          } else {
+            setGmailTokenEmail("");
+          }
         } else {
           setGmailTokenEmail("");
         }
