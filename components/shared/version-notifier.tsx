@@ -15,7 +15,7 @@ interface VersionNotifierProps {
 
 const VersionNotifier: React.FC<VersionNotifierProps> = ({
   currentVersion = pkg.version,
-  githubRepo = "inuxmax/",
+  githubRepo = "oiov/Mail1s.net",
   className = "",
 }) => {
   const [latestVersion, setLatestVersion] = useState<string>("");

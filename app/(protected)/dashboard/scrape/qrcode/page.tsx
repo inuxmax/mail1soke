@@ -34,7 +34,7 @@ export default async function DashboardPage() {
       <CodeLight content={`https://Mail1s.net/api/v1/scraping/qrcode`} />
       <QRCodeEditor
         user={{ id: user.id, apiKey: user.apiKey || "", team: user.team }}
-        url="https://github.com/"
+        url="https://github.com/oiov"
       />
     </>
   );

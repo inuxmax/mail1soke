@@ -35,28 +35,31 @@ export const {
         if (token.sub) {
           session.user.id = token.sub;
         }
+
         if (token.email) {
           session.user.email = token.email;
         }
+
         if (token.role) {
           session.user.role = token.role;
         }
+
         session.user.name = token.name;
         session.user.image = token.picture;
         session.user.active = token.active as number;
         session.user.team = token.team as string;
         session.user.apiKey = token.apiKey as string;
       }
-      // Lưu accessToken vào session (cho Gmail API)
-      if (token.accessToken) {
-        (session as any).accessToken = token.accessToken;
-      }
+
       return session;
     },
-    async jwt({ token, account }) {
+    async jwt({ token }) {
       if (!token.sub) return token;
+
       const dbUser = await getUserById(token.sub);
+
       if (!dbUser) return token;
+
       token.name = dbUser.name;
       token.email = dbUser.email;
       token.picture = dbUser.image;
@@ -64,10 +67,7 @@ export const {
       token.active = dbUser.active;
       token.team = dbUser.team || "free";
       token.apiKey = dbUser.apiKey;
-      // Lưu accessToken Google khi đăng nhập Google
-      if (account?.provider === "google") {
-        token.accessToken = account.access_token;
-      }
+
       return token;
     },
   },

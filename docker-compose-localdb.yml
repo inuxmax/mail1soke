@@ -1,7 +1,6 @@
 services:
   app:
-    image: ghcr.io/oiov/
-    /wrdo:${TAG:-latest}
+    image: ghcr.io/oiov/Mail1s.net/wrdo:${TAG:-latest}
     container_name: wrdo
     ports:
       - "3000:3000"

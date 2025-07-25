@@ -10,7 +10,7 @@ import { UserPasswordForm } from "@/components/forms/user-password-form";
 import { UserRoleForm } from "@/components/forms/user-role-form";
 
 export const metadata = constructMetadata({
-  title: "Settings – Mail1s.Net",
+  title: "Settings – Mail1s.net",
   description: "Configure your account and website settings.",
 });
 

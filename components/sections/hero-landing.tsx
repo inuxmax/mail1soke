@@ -33,7 +33,7 @@ export default function HeroLanding({
           <span className="mr-1">🚀</span>
           {t("deployWithVercel")}&nbsp;
           <span className="font-bold" style={{ fontFamily: "Bahamas Bold" }}>
-            Email
+            Vercel
           </span>
           &nbsp;
           {t("now")}
@@ -57,7 +57,7 @@ export default function HeroLanding({
             className="shadow-sm"
           /> */}
           <Link
-            href="/docs"
+            href="/docs/developer"
             prefetch={true}
             className={cn(
               buttonVariants({ rounded: "xl", size: "lg", variant: "outline" }),
@@ -80,7 +80,7 @@ export default function HeroLanding({
           </Link>
         </div>
 
-        <EmailManagerExp />
+        <UrlShortener />
       </div>
     </section>
   );
@@ -228,8 +228,7 @@ export function LandingImages() {
       </div>
 
       <div className="grids grids-dark mx-auto my-10 flex w-full max-w-6xl px-4">
-      <UrlShortener />
-       
+        <EmailManagerExp />
       </div>
     </>
   );
